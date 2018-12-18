@@ -1,0 +1,160 @@
+
+.ypunto-list-item,
+.ypunto-table-headers {
+  @include make-row();
+
+  margin-right: 0;
+  margin-left: 0;
+
+  > .col,
+  > [class*="col-"] {
+    padding: .8rem .5rem .5rem;
+    //white-space: nowrap;
+    //word-break: normal;
+    //text-overflow: ellipsis;
+    //overflow: hidden;
+    display: none;
+
+    @include media-breakpoint-up(md) {
+      display: block;
+    }
+  }
+
+  // special columns
+  .col-id {
+    // No podemos dejar que tome el tamaño automáticamente, porque podría tener diferente tamaño
+    // para cada fila y se pierde la ilusión de columnas, entonces tenemos que establecer un mínimo y máximo
+    flex-basis: 3rem;
+    max-width: 4rem;
+  }
+
+  .col-display-field {
+    // display field tiene un padding top ligeramente menor, ya que posee un line-height mayor y con eso compensa
+    padding-top: .5rem;
+    display: block;
+  }
+}
+
+.ypunto-list-item {
+  border-bottom: 1px solid $gray-200;
+  color: $gray-700;
+
+  &:hover {
+    background-color: $gray-100;
+  }
+
+  // columnas especiales
+  .col-id {
+    text-align: right;
+    font-family: $font-family-monospace;
+    color: $gray-500;
+  }
+
+  .col-display-field {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin-bottom: -1px;
+  }
+
+  .main-action {
+    padding: .5rem;
+    //margin: .2rem;
+    flex-grow: 1;
+    //border: 1px transparent solid;
+    border-bottom: 2px transparent solid;
+    //margin-bottom: -1px;
+
+    .display-field {
+      font-weight: 500;
+      font-size: 120%;
+      color: $gray-900;
+      display: block;
+    }
+
+    .drop-field {
+      color: $text-muted;
+    }
+
+    &:hover {
+      text-decoration: none;
+      border-color: $primary;
+      //border: 1px $primary dashed;
+      //border-radius: $border-radius-sm;
+      //background-color: $white;
+
+      .display-field {
+        color: $primary;
+      }
+
+      .drop-field {
+        color: $dark;
+      }
+    }
+
+  }
+  .actions {
+    margin: 0 1rem 0 .5rem;
+  }
+}
+
+.ypunto-table-headers {
+  > .col,
+  > [class*="col-"] {
+    padding: 0;
+  }
+
+  .col-actions {
+    display: block;
+    padding: $spacer*.25 $spacer*.5;
+    border-bottom: 2px solid $table-border-color;
+    color: $gray-500;
+    font-size: $font-size-base * 0.88;
+    font-weight: 500;
+  }
+}
+
+.sort-link {
+  display: block;
+  padding: $spacer*.25 $spacer*.5;
+  border-bottom: 2px solid $table-border-color;
+  color: $gray-500;
+  font-size: $font-size-base * 0.88;
+  font-weight: 500;
+
+  &:after {
+    @extend .fas;
+
+    visibility: hidden;
+    margin-left: .5rem;
+    content: fa-content($fa-var-sort);
+  }
+
+  &.asc, &.desc {
+    border-color: $gray-700;
+    color: $gray-700;
+    background-color: $gray-100;
+
+    &:after {
+      visibility: visible;
+    }
+  }
+
+  &.asc:after {
+    content: fa-content($fa-var-sort-up);
+  }
+  &.desc:after {
+    content: fa-content($fa-var-sort-down);
+  }
+
+  &:hover, &:active {
+    text-decoration: none;
+    background-color: $gray-200;
+    color: $primary;
+    border-color: $primary;
+
+    &:after {
+      visibility: visible;
+    }
+  }
+}

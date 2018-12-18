@@ -1,0 +1,144 @@
+
+.sidebar-alt-state {
+  overflow: hidden;
+}
+
+.sidebar {
+  position: fixed;
+  min-height: 100%;
+
+  z-index: $zindex-fixed - 1; // menos 1 para que quede debajo del topbar
+
+  will-change: background-color, width, visibility;
+  transition: background-color ($transition-tic-base), width 0s, visibility ($transition-tic-base);
+  transition-delay: $transition-tic; // para que se vea la transition de .sidebar-content
+
+  // valores que cambian
+  width: 0;
+  visibility: hidden;
+  background-color: rgba($dark, 0);
+
+  /**
+   * Por defecto, el sidebar está oculto, el estado alternativo (.alt-state) es cuando se abre
+   */
+  .sidebar-alt-state & {
+    // valores que cambian
+    width: 100%;
+    visibility: visible;
+    background-color: rgba($dark, .75);
+
+    transition: background-color ($transition-tic), width 0s, visibility 0s;
+    transition-delay: 0s;
+
+    .sidebar-content {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}
+
+.sidebar-content {
+  padding-top: $spacer;
+  position: relative;
+  top: $navbar-height;
+  height: calc(100vh - #{$navbar-height});
+
+  width: 100%;
+  max-width: $sidebar-width;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  will-change: transform;
+  transform: translate3d(-100%, 0, 0);
+  transition: transform ($transition-tic);
+
+  @include box-shadow(0.1rem 0 0.5rem rgba(0, 0, 0, 0.25));
+
+  @supports ((position: -webkit-sticky) or (position: sticky)) {
+    position: -webkit-sticky;
+    position: sticky;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .sidebar-alt-state {
+    overflow: initial;
+  }
+
+  .sidebar {
+    position: initial;
+    visibility: visible;
+    background-color: transparent;
+
+    transition-property: visibility, background-color, width;
+    transition-duration: $transition-tic;
+    transition-delay: 0s;
+
+    width: $sidebar-width;
+
+    .sidebar-alt-state & {
+      width: 0;
+      visibility: hidden;
+      background-color: transparent;
+      transition-property: visibility, background-color, width;
+      transition-duration: $transition-tic;
+
+      .sidebar-content {
+        transform: translate3d(-100%, 0, 0);
+        width: $sidebar-width;
+      }
+    }
+  }
+
+  .sidebar-content {
+    transform: translate3d(0, 0, 0);
+    width: $sidebar-width;
+  }
+}
+
+.sidebar-nav {
+  margin-bottom: $spacer;
+
+  h4 {
+    padding: $spacer/2 $spacer;
+    font-size: $font-size-base * .75;
+    text-transform: uppercase;
+    color: $gray-600;
+    margin-bottom: 0;
+  }
+
+  .nav-link {
+    color: $gray-300;
+    display: flex;
+    align-items: baseline;
+
+    .fas, .far, .fab, .fal {
+      &:first-child {
+        margin-right: .5rem;
+      }
+    }
+
+    .badge {
+      margin-left: auto;
+      font-size: .9rem;
+      align-self: center;
+    }
+
+    &:hover {
+      @include gradient-bg(darken($dark, 10%));
+      color: $gray-100;
+    }
+
+  }
+  .nav-item.active .nav-link {
+    @include gradient-bg(darken($primary, 15%));
+    color: $white;
+  }
+}
+
+.sidebar-dark {
+  .sidebar-content {
+    background-color: darken($dark, 5%);
+    color: $gray-300;
+  }
+}

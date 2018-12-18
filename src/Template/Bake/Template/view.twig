@@ -1,0 +1,211 @@
+{#
+/**
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
+ * @since         2.0.0
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ */
+#}
+<?php
+/**
+ * @var \{{ namespace }}\View\AppView $this
+ * @var \{{ modelObject.getEntityClass() }} ${{ singularVar }}
+ */
+?>
+{#{% set associations = {'BelongsTo': [], 'HasOne': [], 'HasMany': [], 'BelongsToMany': []}|merge(associations) %}#}
+{#{% set fieldsData = Bake.getViewFieldsData(fields, schema, associations) %}#}
+{% set associationFields = fieldsData.associationFields %}
+{% set groupedFields = fieldsData.groupedFields %}
+{% set pK = '$' ~ singularVar ~ '->' ~ primaryKey[0] %}
+
+<div class="ypunto-content {{ pluralVar }} view">
+    <header class="ypunto-content-header">
+        <h1 class="ypunto-title"><?= h(${{ singularVar }}->{{ displayField }}) ?></h1>
+
+        <div class="btn-toolbar" role="toolbar" aria-label="<?= __('Acciones') ?>">
+            <div class="btn-group">
+                <?= $this->Html->link(
+                    __('{icon} Volver al listado', ['icon' => '<i class="fas fa-fw fa-angle-left"></i>']),
+                    ['action' => 'index'],
+                    ['class' => 'btn btn-sm btn-light-alt', 'escape' => false]
+                ) ?>
+
+                <?= $this->Html->link(
+                    __('{icon} Editar', ['icon' => '<i class="fas fa-fw fa-pencil-alt"></i>']),
+                    ['action' => 'edit', {{ pK|raw }}],
+                    ['class' => 'btn btn-sm btn-light-alt', 'escape' => false]
+                ) ?>
+
+            </div>
+            <?= $this->Form->postLink(
+                __('{icon} Eliminar', ['icon' => '<i class="fas fa-fw fa-trash"></i>']),
+                ['action' => 'delete', {{ pK|raw }}],
+                ['confirm' => __('Eliminar este registro?'), 'class' => 'btn btn-sm btn-danger ml-4', 'escape' => false]
+            ) ?>
+
+        </div>
+    </header>
+
+    <div class="ypunto-view">
+        <section class="ypunto-view-main">
+            <div class="card ypunto-view-info">
+{% if groupedFields['string'] %}
+                <div class="card-body strings">
+{% for field in groupedFields['string'] %}
+{% if associationFields[field] %}
+{% set details = associationFields[field] %}
+                    <div class="row row-data">
+                        <div class="col-sm-3 key"><?= __('{{ details.property|humanize }}') ?></div>
+                        <div class="col val"><?= ${{ singularVar }}->has('{{ details.property }}') ? $this->Html->link(${{ singularVar }}->{{ details.property }}->{{ details.displayField }}, ['controller' => '{{ details.controller }}', 'action' => 'view', ${{ singularVar }}->{{ details.property }}->{{ details.primaryKey[0] }}]) : '' ?></div>
+                    </div>
+{% else %}
+                    <div class="row row-data">
+                        <div class="col-sm-3 key"><?= __('{{ field|humanize }}') ?></div>
+                        <div class="col val"><?= h(${{ singularVar }}->{{ field }}) ?></div>
+                    </div>
+{% endif %}
+{% endfor %}
+                </div>
+{% endif %}
+{% if associations.HasOne %}
+                <div class="card-body border-top numbers">
+{% for alias, details in associations.HasOne %}
+                    <div class="row row-data">
+                        <div class="col-sm-3 key"><?= __('{{ alias|underscore|singularize|humanize }}') ?></div>
+                        <div class="col val"><?= ${{ singularVar }}->has('{{ details.property }}') ? $this->Html->link(${{ singularVar }}->{{ details.property }}->{{ details.displayField }}, ['controller' => '{{ details.controller }}', 'action' => 'view', ${{ singularVar }}->{{ details.property }}->{{ details.primaryKey[0] }}]) : '' ?></div>
+                    </div>
+{% endfor %}
+                </div>
+{% endif %}
+{% if groupedFields.number %}
+                <div class="card-body border-top numbers">
+{% for field in groupedFields.number %}
+                    <div class="row row-data">
+                        <div class="col-sm-3 key"><?= __('{{ field|humanize }}') ?></div>
+                        <div class="col val"><?= $this->Number->format(${{ singularVar }}->{{ field }}) ?></div>
+                    </div>
+{% endfor %}
+                </div>
+{% endif %}
+{% if groupedFields.date %}
+                <div class="card-body border-top dates">
+{% for field in groupedFields.date %}
+                    <div class="row row-data">
+                        <div class="col-sm-3 key"><?= __('{{ field|humanize }}') ?></div>
+                        <div class="col val"><?= h(${{ singularVar }}->{{ field }}) ?></div>
+                    </div>
+{% endfor %}
+                </div>
+{% endif %}
+{% if groupedFields.boolean %}
+                <div class="card-body border-top booleans">
+{% for field in groupedFields.boolean %}
+                    <div class="row row-data">
+                        <div class="col-sm-3 key"><?= __('{{ field|humanize }}') ?></div>
+                        <div class="col val"><?= ${{ singularVar }}->{{ field }} ? __('Sí') : __('No'); ?></div>
+                    </div>
+{% endfor %}
+                </div>
+{% endif %}
+{% if groupedFields.text %}
+                <div class="card-body border-top texts">
+{% for field in groupedFields.text %}
+                    <div class="row row-data">
+                        <div class="col-sm-3 key"><?= __('{{ field|humanize }}') ?></div>
+                        <div class="col val"><?= $this->Text->autoParagraph(h(${{ singularVar }}->{{ field }})); ?></div>
+                    </div>
+{% endfor %}
+                </div>
+{% endif %}
+            </div>
+        </section>
+        <section class="ypunto-view-aside">
+            <div class="card ypunto-actions-card">
+                <div class="card-body bg-light">
+                    <ul class="list-unstyled text-muted small mb-0">
+                        <li><i class="fas fa-fw fa-fingerprint"></i> <?= __('Id.') ?> <strong class="text-monospace"><?= $this->Number->format({{ pK|raw }}) ?></strong></li>
+                        {% if created %}<li><i class="far fa-fw fa-calendar-plus"></i> <?= __('Alta') ?> <strong><?= ${{ singularVar }}->created ?></strong></li>{% endif %}
+                        {% if modified %}<li><i class="far fa-fw fa-calendar-check"></i> <?= __('Modificado') ?> <strong><?= ${{ singularVar }}->modified ?></strong></li>{% endif %}
+                        <li><i class="fas fa-fw fa-history"></i> <?= __('Historial') ?> <a href="#"><?= __('Versiones anteriores') ?></a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+{% set relations = associations.BelongsToMany|merge(associations.HasMany) %}
+{% if relations %}
+    <div class="card related">
+        <div class="card-header ypunto-card-header-nav">
+            <ul class="nav nav-pills card-header-pills">
+{% for alias, details in relations %}
+{% set otherSingularVar = alias|variable %}
+{% set otherPluralHumanName = details.controller|underscore|humanize %}
+                <li class="nav-item">
+                    <a class="nav-link{% if true == loop.first %} active{% endif %}" data-toggle="tab" href="#{{ otherSingularVar }}" role="tab" aria-controls="{{ otherSingularVar }}" aria-selected="true">
+                        <?= __('{{ otherPluralHumanName }}') ?> <span class="badge badge-pill badge-success ml-2"><?= count(${{ singularVar }}->{{ details.property }}) ?></span>
+                    </a>
+                </li>
+{% endfor %}
+            </ul>
+        </div>
+        <div class="tab-content">
+{% for alias, details in relations %}
+{% set otherSingularVar = alias|variable %}
+{% set otherPluralHumanName = details.controller|underscore|humanize %}
+            <div class="tab-pane table-responsive fade{% if true == loop.first %} show active{% endif %}" id="{{ otherSingularVar }}" role="tabpanel" aria-labelledby="profile-tab">
+                <?php if (!empty(${{ singularVar }}->{{ details.property }})): ?>
+                <table class="table">
+                    <tr>
+{% for field in details.fields %}
+                        <th scope="col"><?= __('{{ field|humanize }}') ?></th>
+{% endfor %}
+                        <th scope="col" class="actions"><?= __('Actions') ?></th>
+                    </tr>
+                    <?php foreach (${{ singularVar }}->{{ details.property }} as ${{ otherSingularVar }}): ?>
+                    <tr>
+{% for field in details.fields %}
+                        <td><?= h(${{ otherSingularVar }}->{{ field }}) ?></td>
+{% endfor %}
+{% set otherPk = '$' ~ otherSingularVar ~ '->' ~ details.primaryKey[0] %}
+                        <td class="actions">
+                            <?= $this->Html->link(__('View'), ['controller' => '{{ details.controller }}', 'action' => 'view', {{ otherPk|raw }}]) ?>
+                            <?= $this->Html->link(__('Edit'), ['controller' => '{{ details.controller }}', 'action' => 'edit', {{ otherPk|raw }}]) ?>
+                            <?= $this->Form->postLink(__('Delete'), ['controller' => '{{ details.controller }}', 'action' => 'delete', {{ otherPk|raw }}], ['confirm' => __('Are you sure you want to delete # {0}?', {{ otherPk|raw }})]) ?>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
+                <?php endif; ?>
+            </div>
+{% endfor %}
+        </div>
+    </div>
+{% endif %}
+</div>
+
+<?php $this->append('ypunto-quick-actions') ?>
+    <a class="dropdown-item" href="<?= $this->Url->build(['action' => 'add']) ?>"><?= __('Crear {{ singularHumanName }}') ?></a>
+    <a class="dropdown-item" href="<?= $this->Url->build(['action' => 'index']) ?>"><?= __('Listado de {{ pluralHumanName }}') ?></a>
+    <div class="dropdown-divider"></div>
+
+{% set done = [] %}
+{% for type, data in associations %}
+{% for alias, details in data %}
+{% if details.controller is not same as(_view.name) and details.controller not in done %}
+    <h6 class="dropdown-header"><?= __('{{ alias|underscore|humanize }}') ?></h6>
+    <a class="dropdown-item" href="<?= $this->Url->build(['controller' => '{{ details.controller }}', 'action' => 'index']) ?>"><?= __('Listado de {{ alias|underscore|humanize }}') ?></a>
+    <a class="dropdown-item" href="<?= $this->Url->build(['controller' => '{{ details.controller }}', 'action' => 'add']) ?>"><?= __('Crear {{ alias|underscore|singularize|humanize }}') ?></a>
+
+{% set done = done|merge(['controller']) %}
+{% endif %}
+{% endfor %}
+{% endfor %}
+<?php $this->end() ?>

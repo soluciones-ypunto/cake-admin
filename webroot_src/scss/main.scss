@@ -1,0 +1,37 @@
+/**
+ * Archivo principal de estilos
+ */
+// fonts
+@import "fonts";
+// en variables va la personalización de todo, tanto bootstrap como fontawesome
+// bootstrap 4
+@import "../node_modules/bootstrap/scss/functions";
+@import "variables";
+@import "../node_modules/bootstrap/scss/bootstrap";
+// fontawesome 5
+@import "../node_modules/@fortawesome/fontawesome-free/scss/fontawesome";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/brands";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/regular";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/solid";
+
+// custom variables, ver qué hacemos con estas cosas, se necesitan antes de los estilos, para que las variables
+// estén disponibles, pero después de bootstrap, porque depende de variables de bootstrap que no están en nuestro
+// variables, esto con less no pasaba :p
+$navbar-height: $navbar-padding-y * 2 + $line-height-base * $font-size-base - 0.05rem;
+
+// funciones útiles, después habría que mover esto a otro archivo
+@function space($key) {
+  @if map-has-key($spacers, $key) {
+    @return map-get($spacers, $key);
+  }
+
+  @warn "Unknown `#{$key}` in $spacers.";
+  @return null;
+}
+
+// plugins y otras cosas
+@import "components/dropdown_dark";
+@import "components/table_custom";
+@import "components/sidebar";
+// custom styles
+@import "styles";

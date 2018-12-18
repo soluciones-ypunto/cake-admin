@@ -1,0 +1,101 @@
+{#
+/**
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
+ * @since         2.0.0
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ */
+#}
+{% set fields = Bake.filterFields(fields, schema, modelObject) %}
+    <?= $this->Form->create(${{ singularVar }}, ['class' => 'ypunto-form']) ?>
+
+    <section class="ypunto-form-main">
+        <fieldset>
+{% for field in mainSectionFields if field not in primaryKey %}
+{% if keyFields[field] %}
+{% set fieldData = Bake.columnData(field, schema) %}
+{% if fieldData.null %}
+            <?= $this->Form->control('{{ field }}', ['options' => ${{ keyFields[field] }}, 'empty' => true]) ?>
+{% else %}
+            <?= $this->Form->control('{{ field }}', ['options' => ${{ keyFields[field] }}]) ?>
+{% endif %}
+{% elseif field not in ['created', 'modified', 'updated'] %}
+{% set fieldData = Bake.columnData(field, schema) %}
+{% if fieldData.type in ['date', 'datetime', 'time'] and fieldData.null %}
+            <?= $this->Form->control('{{ field }}', ['empty' => true]) ?>
+{% else %}
+            <?= $this->Form->control('{{ field }}') ?>
+{% endif %}
+{% endif %}
+{% endfor %}
+{% if associations.BelongsToMany %}
+{% for assocName, assocData in associations.BelongsToMany %}
+            <?= $this->Form->control('{{ assocData.property }}._ids', ['options' => ${{ assocData.variable }}]) ?>
+{% endfor %}
+{% endif %}
+        </fieldset>
+    </section>
+
+    <section class="ypunto-form-aside">
+        <div class="card ypunto-actions-card">
+            <div class="card-body bg-light">
+{% if action != 'add' %}
+                <ul class="list-unstyled text-muted small mb-0">
+                    <li><i class="fas fa-fw fa-fingerprint"></i> <?= __('Id.') ?> <strong class="text-monospace"><?= $this->Number->format(${{ singularVar }}->{{ primaryKey[0] }}) ?></strong></li>
+                    <li><i class="far fa-fw fa-calendar-plus"></i> <?= __('Alta') ?> <strong><?= ${{ singularVar }}->created ?></strong></li>
+                    <li><i class="far fa-fw fa-calendar-check"></i> <?= __('Modificado') ?> <strong><?= ${{ singularVar }}->modified ?></strong></li>
+                    <li><i class="fas fa-fw fa-history"></i> <?= __('Historial') ?> <a href="#"><?= __('Versiones anteriores') ?></a></li>
+                </ul>
+{% endif %}
+{% if action == 'add' %}
+                <em class="text-muted small">
+                    <i class="fas fa-fw fa-question-circle"></i>
+                    <?= __('Complete toda la información') ?>
+                </em>
+{% endif %}
+            </div>
+            <div class="card-body border-top">
+                <div class="btn-group">
+                    <?= $this->Form->button(
+                        __('{icon} Guardar cambios', ['icon' => '<i class="far fa-fw fa-save"></i>']),
+                        ['escape' => false]
+                    ) ?>
+
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <button type="submit" class="dropdown-item" name="_nextAction" value="add">
+                            <i class="fas fa-fw fa-save"></i> <?= __('Guardar y crear nuevo') ?>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% if sideSectionFields %}
+        <div class="card">
+            <div class="card-body bg-light">
+                <h5 class="card-title"><?= __('Información Complementaria') ?></h5>
+                <p class="text-muted small mb-0">
+                    <em>
+                        <i class="fas fa-question-circle"></i>
+                        <?= __('Usar este espacio para agrupar la información y mejorar la usabilidad.') ?>
+                    </em>
+                </p>
+            </div>
+            <div class="card-body border-top">
+                <fieldset>
+{% for field in sideSectionFields if field not in primaryKey %}
+                    <?= $this->Form->control('{{ field }}') ?>
+{% endfor %}
+                </fieldset>
+            </div>
+        </div>
+{% endif %}
+    </section>
+    <?= $this->Form->end() ?>

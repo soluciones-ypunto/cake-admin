@@ -1,0 +1,338 @@
+
+// navbar-ypunto, extiende a navbar-dark
+.navbar-dark.navbar-ypunto {
+  padding: 0;
+
+  //@include media-breakpoint-down(md) {
+    //@include box-shadow(0 0.1rem 0.5rem rgba(0, 0, 0, 0.25));
+  //}
+
+  .navbar-brand {
+    @include media-breakpoint-up(lg) {
+      background-color: darken($dark, 5%);
+      min-width: $sidebar-width;
+      padding: 0 1rem;
+      margin-right: 0;
+    }
+  }
+
+  .navbar-nav .nav-link {
+    @include hover-focus {
+      color: $navbar-dark-hover-color;
+      background-color: darken($dark, 5%);
+    }
+
+    padding-left: $nav-link-padding-x * .75;
+    padding-right: $nav-link-padding-x * .75;
+  }
+
+  .navbar-toggler {
+    margin-right: $spacer;
+  }
+
+  .dropdown-menu {
+    margin-top: 0;
+    border: 0 none;
+
+    @if $enable-rounded {
+      border-radius: 0 0 $border-radius $border-radius;
+    } @else {
+      border-radius: 0;
+    }
+
+    @include media-breakpoint-down(sm) {
+      box-shadow: none;
+      border-radius: 0;
+    }
+  }
+
+  .form-control {
+    border-color: darken($dark, 7%);
+    @include box-shadow(inset 0 .1rem .5rem rgba(0, 0, 0, .2));
+
+    &:not(:focus) {
+      background-color: lighten($dark, 15%);
+
+      &::placeholder {
+        color: $gray-300;
+      }
+    }
+
+    &:focus {
+      border-color: $primary;
+      @include box-shadow(0 0 0 $input-btn-focus-width rgba($component-active-bg, .5));
+    }
+  }
+
+  .form-search {
+    .btn-outline-primary {
+      border-color: darken($dark, 7%);
+    }
+  }
+}
+
+html, body {
+  min-height: 100%;
+}
+
+body {
+  background-color: $gray-200;
+  color: $dark;
+  letter-spacing: -.02rem;
+}
+
+.ypunto-app {
+  padding-top: $navbar-height;
+}
+
+.ypunto-main {
+  display: flex;
+}
+
+.content {
+  padding: $grid-gutter-width/2;
+  width: 100%;
+  will-change: width;
+  padding-bottom: 45vh;
+}
+
+// alerts
+.alert {
+  .alert-icon {
+    font-size: 1.5rem;
+    margin-right: $spacer/2;
+  }
+  .alert-heading {
+    margin-top: 0;
+    margin-bottom: $spacer*.25;
+    font-size: 120%;
+  }
+}
+
+// pagination
+.paginator {
+  .page-link {
+    min-width: 2.5rem;
+    text-align: center;
+  }
+  .page-info {
+    color: $gray-500;
+    display: inline-block;
+    margin-right: $spacer*.5;
+    margin-left: $spacer*.3;
+
+    .form-control {
+      vertical-align: baseline;
+    }
+  }
+  .pagination-form {
+    .form-control:not(:focus) {
+      border-color: $pagination-border-color;
+    }
+  }
+  .pagination {
+    margin-bottom: 0;
+  }
+}
+
+// forms
+.force-form-inline {
+  .form-control {
+    display: inline-block;
+    width: auto; // Prevent labels from stacking above inputs in `.form-group`
+    vertical-align: middle;
+  }
+}
+
+.ypunto-content {
+  //max-width: $content-width;
+}
+
+.ypunto-content-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  //margin-bottom: $spacer;
+
+  @include media-breakpoint-up(md) {
+    align-items: center;
+    flex-direction: row;
+  }
+}
+
+.ypunto-form, .ypunto-view {
+  display: flex;
+  flex-direction: column;
+
+  .card {
+    margin-bottom: $spacer;
+  }
+
+  & &-aside {
+    display: flex;
+    flex-direction: column;
+
+    .ypunto-actions-card {
+      order: 99;
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    flex-direction: row;
+
+    & &-main {
+      flex-grow: 1;
+      margin-right: $grid-gutter-width;
+    }
+    & &-aside {
+      width: $side-content-width;
+      min-width: $side-content-width;
+
+      .ypunto-actions-card {
+        position: sticky;
+        z-index: $zindex-sticky;
+        top: $navbar-height + $spacer;
+        order: 0;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(xl) {
+    & &-aside {
+      width: $side-content-width-xl;
+      min-width: $side-content-width-xl;
+    }
+  }
+}
+
+.ypunto-view {
+  & &-aside {
+    .ypunto-actions-card {
+      position: initial;
+    }
+  }
+}
+
+.ypunto-actions-card {
+  ul li {
+    margin-bottom: $spacer * 0.2;
+  }
+}
+
+// general
+.sticky-navbar-top {
+  position: sticky;
+  //&.js-is-sticky {
+    top: $navbar-height;
+    z-index: $zindex-sticky;
+  //}
+  //  background-color: $dark !important;
+  //  box-shadow: 0 4px 4px 0 #00000026;
+  //
+  //  $offset: ($grid-gutter-width+4)/2;
+  //  margin-left: -$offset;
+  //  margin-right: -$offset;
+  //
+  //  .ypunto-table-headers {
+  //    display: none;
+  //  }
+  //}
+}
+
+.ypunto-title {
+  font-weight: 300;
+  font-size: $font-size-base * 3;
+  letter-spacing: -.12rem;
+}
+
+.btn-light-alt {
+  @include button-variant($light, darken($light, 15%));
+}
+
+.ypunto-view-info {
+  .key {
+    color: $gray-500;
+  }
+  .val {
+
+  }
+  .row-data {
+    margin-bottom: $spacer * .5;
+  }
+
+  @include media-breakpoint-up(sm) {
+    .key {
+      text-align: right;
+    }
+  }
+}
+
+.ypunto-card-header-nav-dark {
+  display: flex;
+  justify-content: center;
+  background-color: $dark;
+
+  ul.card-header-pills {
+    flex-shrink: 1;
+    background-color: darken($dark, 10%);
+    padding: 0 $spacer * .25;
+    border-radius: $border-radius-lg;
+
+    .nav-link {
+      color: $gray-400;
+      border-radius: 0;
+
+      &:hover,&.focus {
+        color: $white;
+        background-color: darken($dark, 20%);
+      }
+
+      &.active {
+        color: $white;
+        background-color: darken($dark, 10%);
+        box-shadow: inset 0 -3px 0px 0px $primary;
+      }
+    }
+  }
+}
+
+.ypunto-card-header-nav {
+  display: flex;
+  justify-content: center;
+  background-color: $gray-100;
+  border-bottom: 0 none;
+
+  ul.card-header-pills {
+    flex-shrink: 1;
+    background-color: darken($gray-100, 10%);
+    border-radius: $border-radius-lg;
+
+    .nav-link {
+      color: $gray-500;
+      border-radius: 0;
+
+      &:hover, &.focus {
+        color: $black;
+        background-color: darken($gray-100, 20%);
+      }
+
+      &.active {
+        color: $black;
+        background-color: darken($gray-100, 10%);
+        box-shadow: inset 0 -3px 0px 0px $primary;
+      }
+    }
+
+    .nav-item {
+      width: 100%;
+    }
+
+    @include media-breakpoint-up(sm) {
+      padding: 0 $spacer * .25;
+
+      .nav-item {
+        width: auto;
+      }
+    }
+  }
+}
