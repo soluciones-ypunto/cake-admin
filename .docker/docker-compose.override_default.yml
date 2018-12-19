@@ -1,0 +1,31 @@
+#
+# copiar este archivo con el nombre docker-compose.override.yml en el mismo directorio
+# si es necesario, configurar valores según necesidad de cada uno.
+# ==============================================================================================================
+
+version: '3'
+services:
+  web:
+    environment:
+      VIRTUAL_HOST: plus.casinostafe.loc
+    networks:
+      - default
+      - proxy
+
+  php:
+    environment:
+      DEBUG: 1
+      DATABASE_TEST_URL: "mysql://root:${DB_ROOT_PASSWORD}@db/test"
+
+  db:
+    ports:
+      - 3306:3306
+
+  pma:
+    ports:
+      - 8080:80
+
+networks:
+  proxy:
+    external:
+      name: nginx-proxy

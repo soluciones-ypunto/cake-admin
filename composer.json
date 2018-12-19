@@ -1,23 +1,23 @@
 {
-    "name": "soluciones-ypunto/cake-admin",
-    "description": "CakePHP admin plugin",
-    "type": "cakephp-plugin",
-    "license": "MIT",
-    "require": {
-        "cakephp/cakephp": "^3.5"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^5.7.14|^6.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "Ypunto\\Admin\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Ypunto\\Admin\\Test\\": "tests/",
-            "Cake\\Test\\": "vendor/cakephp/cakephp/tests/"
-        }
+  "name": "soluciones-ypunto/cake-admin",
+  "description": "CakePHP admin plugin",
+  "type": "cakephp-plugin",
+  "license": "MIT",
+  "require": {
+    "cakephp/cakephp": "^3.5"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.7.14|^6.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Ypunto\\Admin\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Ypunto\\Admin\\Test\\": "tests/",
+      "Cake\\Test\\": "vendor/cakephp/cakephp/tests/"
+    }
+  }
 }
