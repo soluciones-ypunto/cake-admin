@@ -12,7 +12,6 @@ use Cake\Event\Event;
 use Cake\Event\EventListenerInterface;
 use Cake\ORM\Association\BelongsTo;
 use Cake\ORM\Association\BelongsToMany;
-use Cake\ORM\Table;
 use Cake\Utility\Hash;
 
 /**
@@ -49,15 +48,25 @@ class TemplateRenderFilter implements EventListenerInterface
     public function implementedEvents()
     {
         return [
-            'Bake.beforeRender' => 'beforeRender'
+            'Bake.beforeRender' => 'beforeRender',
+            'Bake.beforeRender.Controller.controller' => 'beforeRenderController',
         ];
     }
 
     /**
      * @param Event  $event
-     * @param string $templateFile
      */
-    public function beforeRender(Event $event, $templateFile = '')
+    public function beforeRenderController(Event $event)
+    {
+        /** @var BakeView $view */
+        $view = $event->getSubject();
+        $view->set('primaryKey', $view->get('modelObj')->getPrimaryKey());
+    }
+
+    /**
+     * @param Event  $event
+     */
+    public function beforeRender(Event $event)
     {
         /** @var BakeView $view */
         $view = $event->getSubject();
@@ -74,10 +83,6 @@ class TemplateRenderFilter implements EventListenerInterface
             case 'view':
                 $this->_prepareViewAction($view);
                 break;
-        }
-
-        if (strpos($templateFile, 'Controller/controller.twig') !== false) {
-            $view->set('primaryKey', $view->get('modelObj')->getPrimaryKey());
         }
     }
 

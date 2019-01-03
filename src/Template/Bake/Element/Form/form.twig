@@ -62,6 +62,7 @@
 {% endif %}
             </div>
             <div class="card-body border-top">
+{% if action == 'add' %}
                 <div class="btn-group">
                     <?= $this->Form->button(
                         __('{icon} Guardar cambios', ['icon' => '<i class="far fa-fw fa-save"></i>']),
@@ -75,6 +76,13 @@
                         </button>
                     </div>
                 </div>
+{% endif %}
+{% if action != 'add' %}
+                <?= $this->Form->button(
+                    __('{icon} Guardar cambios', ['icon' => '<i class="far fa-fw fa-save"></i>']),
+                    ['escape' => false]
+                ) ?>
+{% endif %}
             </div>
         </div>
 {% if sideSectionFields %}
