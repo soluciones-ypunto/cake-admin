@@ -94,6 +94,14 @@ body {
   width: 100%;
   will-change: width;
   padding-bottom: 45vh;
+
+  @include media-breakpoint-up(lg) {
+    width: calc(100% - #{$sidebar-width});
+  }
+
+  .sidebar-alt-state & {
+    width: 100%;
+  }
 }
 
 // alerts
@@ -153,6 +161,10 @@ body {
   flex-direction: column;
   justify-content: space-between;
   //margin-bottom: $spacer;
+
+  .btn-toolbar {
+    margin-bottom: $spacer;
+  }
 
   @include media-breakpoint-up(md) {
     align-items: center;

@@ -131,8 +131,12 @@
                 <div class="card-body bg-light">
                     <ul class="list-unstyled text-muted small mb-0">
                         <li><i class="fas fa-fw fa-fingerprint"></i> <?= __('Id.') ?> <strong class="text-monospace"><?= $this->Number->format({{ pK|raw }}) ?></strong></li>
-                        {% if created %}<li><i class="far fa-fw fa-calendar-plus"></i> <?= __('Alta') ?> <strong><?= ${{ singularVar }}->created ?></strong></li>{% endif %}
-                        {% if modified %}<li><i class="far fa-fw fa-calendar-check"></i> <?= __('Modificado') ?> <strong><?= ${{ singularVar }}->modified ?></strong></li>{% endif %}
+{% if created %}
+                        <li><i class="far fa-fw fa-calendar-plus"></i> <?= __('Alta') ?> <strong><?= ${{ singularVar }}->created ?></strong></li>
+{% endif %}
+{% if modified %}
+                        <li><i class="far fa-fw fa-calendar-check"></i> <?= __('Modificado') ?> <strong><?= ${{ singularVar }}->modified ?></strong></li>
+{% endif %}
                         <li><i class="fas fa-fw fa-history"></i> <?= __('Historial') ?> <a href="#"><?= __('Versiones anteriores') ?></a></li>
                     </ul>
                 </div>
@@ -194,7 +198,9 @@
 <?php $this->append('ypunto-quick-actions') ?>
     <a class="dropdown-item" href="<?= $this->Url->build(['action' => 'add']) ?>"><?= __('Crear {{ singularHumanName }}') ?></a>
     <a class="dropdown-item" href="<?= $this->Url->build(['action' => 'index']) ?>"><?= __('Listado de {{ pluralHumanName }}') ?></a>
+{% if data %}
     <div class="dropdown-divider"></div>
+{% endif %}
 
 {% set done = [] %}
 {% for type, data in associations %}
