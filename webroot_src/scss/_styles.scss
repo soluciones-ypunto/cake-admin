@@ -164,15 +164,20 @@ body {
 
   .btn-toolbar {
     margin-bottom: $spacer;
+    flex-wrap: nowrap;
+
+    @include media-breakpoint-up(md) {
+      margin-bottom: 0;
+    }
   }
 
   @include media-breakpoint-up(md) {
-    align-items: center;
+    align-items: flex-end;
     flex-direction: row;
   }
 }
 
-.ypunto-form, .ypunto-view {
+.ypunto-form, .ypunto-view, .ypunto-section {
   display: flex;
   flex-direction: column;
 
@@ -217,7 +222,7 @@ body {
   }
 }
 
-.ypunto-view {
+.ypunto-view, .ypunto-section {
   & &-aside {
     .ypunto-actions-card {
       position: initial;
