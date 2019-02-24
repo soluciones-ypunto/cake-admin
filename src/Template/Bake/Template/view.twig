@@ -62,12 +62,12 @@
 {% if associationFields[field] %}
 {% set details = associationFields[field] %}
                     <div class="row row-data">
-                        <div class="col-sm-3 key"><?= __('{{ details.property|humanize }}') ?></div>
+                        <div class="col-xl-3 key"><?= __('{{ details.property|humanize }}') ?></div>
                         <div class="col val"><?= ${{ singularVar }}->has('{{ details.property }}') ? $this->Html->link(${{ singularVar }}->{{ details.property }}->{{ details.displayField }}, ['controller' => '{{ details.controller }}', 'action' => 'view', ${{ singularVar }}->{{ details.property }}->{{ details.primaryKey[0] }}]) : '' ?></div>
                     </div>
 {% else %}
                     <div class="row row-data">
-                        <div class="col-sm-3 key"><?= __('{{ field|humanize }}') ?></div>
+                        <div class="col-xl-3 key"><?= __('{{ field|humanize }}') ?></div>
                         <div class="col val"><?= h(${{ singularVar }}->{{ field }}) ?></div>
                     </div>
 {% endif %}
@@ -78,7 +78,7 @@
                 <div class="card-body border-top numbers">
 {% for alias, details in associations.HasOne %}
                     <div class="row row-data">
-                        <div class="col-sm-3 key"><?= __('{{ alias|underscore|singularize|humanize }}') ?></div>
+                        <div class="col-xl-3 key"><?= __('{{ alias|underscore|singularize|humanize }}') ?></div>
                         <div class="col val"><?= ${{ singularVar }}->has('{{ details.property }}') ? $this->Html->link(${{ singularVar }}->{{ details.property }}->{{ details.displayField }}, ['controller' => '{{ details.controller }}', 'action' => 'view', ${{ singularVar }}->{{ details.property }}->{{ details.primaryKey[0] }}]) : '' ?></div>
                     </div>
 {% endfor %}
@@ -88,7 +88,7 @@
                 <div class="card-body border-top numbers">
 {% for field in groupedFields.number %}
                     <div class="row row-data">
-                        <div class="col-sm-3 key"><?= __('{{ field|humanize }}') ?></div>
+                        <div class="col-xl-3 key"><?= __('{{ field|humanize }}') ?></div>
                         <div class="col val"><?= $this->Number->format(${{ singularVar }}->{{ field }}) ?></div>
                     </div>
 {% endfor %}
@@ -98,7 +98,7 @@
                 <div class="card-body border-top dates">
 {% for field in groupedFields.date %}
                     <div class="row row-data">
-                        <div class="col-sm-3 key"><?= __('{{ field|humanize }}') ?></div>
+                        <div class="col-xl-3 key"><?= __('{{ field|humanize }}') ?></div>
                         <div class="col val"><?= h(${{ singularVar }}->{{ field }}) ?></div>
                     </div>
 {% endfor %}
@@ -108,7 +108,7 @@
                 <div class="card-body border-top booleans">
 {% for field in groupedFields.boolean %}
                     <div class="row row-data">
-                        <div class="col-sm-3 key"><?= __('{{ field|humanize }}') ?></div>
+                        <div class="col-xl-3 key"><?= __('{{ field|humanize }}') ?></div>
                         <div class="col val"><?= ${{ singularVar }}->{{ field }} ? __('Sí') : __('No'); ?></div>
                     </div>
 {% endfor %}
@@ -118,7 +118,7 @@
                 <div class="card-body border-top texts">
 {% for field in groupedFields.text %}
                     <div class="row row-data">
-                        <div class="col-sm-3 key"><?= __('{{ field|humanize }}') ?></div>
+                        <div class="col-xl-3 key"><?= __('{{ field|humanize }}') ?></div>
                         <div class="col val"><?= $this->Text->autoParagraph(h(${{ singularVar }}->{{ field }})); ?></div>
                     </div>
 {% endfor %}

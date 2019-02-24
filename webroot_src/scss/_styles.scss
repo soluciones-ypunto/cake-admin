@@ -165,10 +165,11 @@ body {
   .btn-toolbar {
     margin-bottom: $spacer;
     flex-wrap: nowrap;
+    white-space: nowrap;
 
-    @include media-breakpoint-up(md) {
-      margin-bottom: 0;
-    }
+    //@include media-breakpoint-up(md) {
+    //  margin-bottom: 0;
+    //}
   }
 
   @include media-breakpoint-up(md) {
@@ -277,7 +278,7 @@ body {
     margin-bottom: $spacer * .5;
   }
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(xl) {
     .key {
       text-align: right;
     }
