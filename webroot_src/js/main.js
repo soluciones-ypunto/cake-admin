@@ -42,9 +42,21 @@
         return false;
     }
 
+    /**
+     * Actualiza el label del input type file custom, ya que por defecto no se actualiza.
+     *
+     *
+     * @param event
+     */
+    function updateCustomFileLabel(event) {
+        let fileName = $(this).val().replace(/\\/g, '/').replace(/.*\//, '');
+        $(this).parent('.custom-file').find('.custom-file-label').text(fileName);
+    }
+
     $(function () {
         $('body')
             .on('click', '[data-toggle=sidebar]', toggleSidebar)
+            .on('change', '.custom-file-input', updateCustomFileLabel)
         ;
     });
 })(jQuery);

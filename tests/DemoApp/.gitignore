@@ -1,0 +1,5 @@
+tmp/
+logs/
+webroot/debug_kit
+webroot/debug_kit/
+webroot/ypunto/

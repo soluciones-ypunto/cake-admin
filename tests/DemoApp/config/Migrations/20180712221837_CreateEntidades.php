@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CreateCosas extends AbstractMigration
+class CreateEntidades extends AbstractMigration
 {
     /**
      * Change Method.
@@ -12,26 +12,48 @@ class CreateCosas extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('cosas');
-        $table->addColumn('entidad_id', 'integer', [
+        $table = $this->table('entidades');
+        $table->addColumn('grupo_id', 'integer', [
+            'default' => null,
             'limit' => 11,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('nombre', 'string', [
-            'limit' => 255,
+            'limit' => 80,
             'null' => false,
         ]);
         $table->addColumn('descripcion', 'text', [
             'default' => null,
             'null' => true,
         ]);
-        $table->addColumn('precio', 'decimal', [
+        $table->addColumn('email', 'string', [
             'default' => null,
+            'limit' => 80,
             'null' => true,
         ]);
-        $table->addColumn('cantidad', 'integer', [
+        $table->addColumn('estado', 'string', [
+            'limit' => 50,
+            'null' => false,
+        ]);
+        $table->addColumn('habilitado', 'boolean', [
+            'default' => 0,
+            'null' => false,
+        ]);
+        $table->addColumn('fecha_nacimiento', 'date', [
+            'default' => null,
+            'null' => false,
+        ]);
+        $table->addColumn('fecha_hora', 'datetime', [
+            'default' => null,
+            'null' => false,
+        ]);
+        $table->addColumn('puntos', 'integer', [
             'default' => null,
             'limit' => 11,
+            'null' => true,
+        ]);
+        $table->addColumn('capital', 'float', [
+            'default' => null,
             'null' => true,
         ]);
         $table->addColumn('created', 'datetime', [
