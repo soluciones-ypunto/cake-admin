@@ -15,11 +15,17 @@
 #}
 <?php
 /**
+ * Soluciones yPunto. Html5 powered solutions.
+ * CakePHP Responsive Template Admin made with Bootstrap 4.
+ *
+ * @link https://github.com/soluciones-ypunto/cake-admin
+ * @copyright Copyright (c) Soluciones yPunto SAS (https://solucionesypunto.com).
+ *
  * @var \{{ namespace }}\View\AppView $this
  * @var \{{ modelObject.getEntityClass() }} ${{ singularVar }}
 {% for var, entityClass in associationVarOptions %}
 {% if keyFields[var] %}
- * @var \{{ entityClass }}[]|\Cake\Collection\CollectionInterface ${{ keyFields[var] }}
+ * @var \{{ entityClass }}[]&\Cake\Datasource\ResultSetInterface ${{ keyFields[var] }}
 {% endif %}
 {% endfor %}
  */

@@ -44,15 +44,15 @@ $dark: $gray-800;
 
 // agregamos un default en gris ya que secondary tiene color
 $theme-colors: (
-        "default": $gray-500,
+  "default": $gray-300,
   //"green": $green,
 );
 
 // font settings
 //$font-family-base: 'Oxygen', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
-$font-family-base: 'Ubuntu', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$font-family-base: system-ui, 'Ubuntu', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
 $headings-font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
-//$font-size-base: .95rem;
+$font-size-base: .95rem;
 $headings-font-weight: 400;
 $lead-font-weight: inherit;
 

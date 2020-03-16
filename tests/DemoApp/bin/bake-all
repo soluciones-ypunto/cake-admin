@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+cd tests/DemoApp/bin;
+
+tableObjects=( Cosas Entidades Etiquetas Grupos );
+
+for table in "${tableObjects[@]}"; do
+    ./cake bake model --no-fixture --no-test -t Ypunto/Admin -f ${table};
+done
+
+for table in "${tableObjects[@]}"; do
+    ./cake bake controller --no-test -t Ypunto/Admin -f ${table};
+    ./cake bake template -t Ypunto/Admin -f ${table};
+done

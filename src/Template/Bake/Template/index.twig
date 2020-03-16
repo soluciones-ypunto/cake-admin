@@ -15,14 +15,25 @@
 #}
 <?php
 /**
+ * Soluciones yPunto. Html5 powered solutions.
+ * CakePHP Responsive Template Admin made with Bootstrap 4.
+ *
+ * @link https://github.com/soluciones-ypunto/cake-admin
+ * @copyright Copyright (c) Soluciones yPunto SAS (https://solucionesypunto.com).
+ *
  * @var \{{ namespace }}\View\AppView $this
- * @var \{{ modelObject.getEntityClass() }}[]|\Cake\Collection\CollectionInterface ${{ pluralVar }}
+ * @var \{{ modelObject.getEntityClass() }}[]&\Cake\Datasource\ResultSetInterface ${{ pluralVar }}
  */
 ?>
 {% set pk = '$' ~ singularVar ~ '->' ~ primaryKey[0] %}
 
 <div class="{{ pluralVar }} index">
-    <h1 class="ypunto-title"><?= __('{{ pluralHumanName }}') ?></h1>
+    <header class="ypunto-content-header">
+        <h1 class="ypunto-title"><?= __('{{ pluralHumanName }}') ?></h1>
+
+{% element 'Form/toolbarActions' %}
+
+    </header>
 
     <div class="card">
         <div class="sticky-navbar-top bg-white p-0">

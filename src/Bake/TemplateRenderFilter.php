@@ -50,6 +50,7 @@ class TemplateRenderFilter implements EventListenerInterface
         return [
             'Bake.beforeRender' => 'beforeRender',
             'Bake.beforeRender.Controller.controller' => 'beforeRenderController',
+            'Bake.beforeRender.Model.table' => 'beforeRenderTable',
         ];
     }
 
@@ -60,6 +61,9 @@ class TemplateRenderFilter implements EventListenerInterface
     {
         /** @var BakeView $view */
         $view = $event->getSubject();
+        //dump($view->get('actions'));
+        //die();
+
         $view->set('primaryKey', $view->get('modelObj')->getPrimaryKey());
     }
 
@@ -83,6 +87,31 @@ class TemplateRenderFilter implements EventListenerInterface
             case 'view':
                 $this->_prepareViewAction($view);
                 break;
+        }
+    }
+
+    /**
+     * @param Event $event
+     */
+    public function beforeRenderTable(Event $event)
+    {
+        /** @var BakeView $view */
+        $view = $event->getSubject();
+        $displayField = $view->get('displayField');
+        $primaryKey = $view->get('primaryKey');
+        $fields = $view->get('fields');
+
+
+
+        /**
+         * Establecemos nombre
+         */
+        if (
+            in_array($displayField, $primaryKey) && // si tiene como displayField una primaryKey (default)
+            in_array('nombre', $fields) // y existe el campo nombre
+        ) {
+            // entonces establecemos nombre como displayField
+            $view->set('displayField', 'nombre');
         }
     }
 

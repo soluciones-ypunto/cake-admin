@@ -3,3 +3,14 @@ logs/
 webroot/debug_kit
 webroot/debug_kit/
 webroot/ypunto/
+config/Migrations/schema-dump-default.lock
+src/Controller/CosasController.php
+src/Controller/EntidadesController.php
+src/Controller/EtiquetasController.php
+src/Controller/GruposController.php
+src/Model/Entity
+src/Model/Table
+src/Template/Cosas
+src/Template/Entidades
+src/Template/Etiquetas
+src/Template/Grupos

@@ -23,6 +23,9 @@ use Ypunto\Admin\View\Helper\PaginatorHelper;
  * Your application's default view class
  *
  * @link https://book.cakephp.org/3.0/en/views.html#the-app-view
+ *
+ * @property PaginatorHelper $Paginator
+ * @property FormHelper $Form
  */
 class AppView extends View
 {

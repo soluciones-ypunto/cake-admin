@@ -49,6 +49,7 @@
   .form-control {
     border-color: darken($dark, 7%);
     @include box-shadow(inset 0 .1rem .5rem rgba(0, 0, 0, .2));
+    @include transition(color 180ms ease-in, background-color 180ms ease-in, box-shadow 180ms ease-in);
 
     &:not(:focus) {
       background-color: lighten($dark, 15%);
@@ -176,6 +177,11 @@ body {
     align-items: flex-end;
     flex-direction: row;
   }
+}
+
+.actions-toolbar {
+  @extend .d-flex;
+  @extend .justify-content-between;
 }
 
 .ypunto-form, .ypunto-view, .ypunto-section {
