@@ -13,6 +13,8 @@ const __webrootdir = path.resolve(__dirname, '../webroot');
 gulp.task('copy-js', () => {
     return gulp
         .src([
+            'node_modules/vue/dist/vue.js',
+            'node_modules/vue/dist/vue.min.js',
             'node_modules/jquery/dist/jquery.min.js',
             'node_modules/popper.js/dist/umd/popper.min.js',
             'node_modules/bootstrap/dist/js/bootstrap.min.js',

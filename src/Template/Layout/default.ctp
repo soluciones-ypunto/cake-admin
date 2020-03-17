@@ -3,6 +3,10 @@
 /**
  * @var \App\View\AppView $this
  */
+
+use Cake\Core\Configure;
+
+$plugin = strtolower($this->request->getParam('plugin'));
 ?>
 <!doctype html>
 <html lang="es">
@@ -22,7 +26,7 @@
 </head>
 <body>
 
-<div class="ypunto-app">
+<div class="ypunto-app<?= $plugin ? " ypunto-plugin-{$plugin}" : null ?>">
     <?= $this->fetch('navbar-top', $this->element('Ypunto/Admin.navbar-top')) ?>
 
     <div class="ypunto-main">
@@ -40,20 +44,19 @@
         </main>
     </div>
     <div class="ypunto-footer">
-
     </div>
 </div>
 
-<!-- Optional JavaScripts -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <?= $this->Html->script([
     'Ypunto/Admin.jquery.min.js',
     'Ypunto/Admin.popper.min.js',
     'Ypunto/Admin.bootstrap.min.js',
     'Ypunto/Admin.jquery.stickybits.min.js',
-    'Ypunto/Admin.main.js',
+    sprintf('%s.js', Configure::read('debug') ? 'vue': 'vue.min'),
 ]) ?>
 
+<?= $this->fetch('vue-components') ?>
+<?= $this->Html->script('Ypunto/Admin.main.js') ?>
 <?= $this->fetch('script') ?>
 
 </body>

@@ -38,15 +38,26 @@
     <div class="card">
         <div class="sticky-navbar-top bg-white p-0">
             <div class="d-flex p-2 justify-content-between">
-                <a href="<?= $this->Url->build(['action' => 'add']) ?>" class="btn btn-light-alt">
-                    <i class="fas fa-fw fa-plus"></i> <span class="d-none d-md-inline"><?= __('Crear {{ singularHumanName }}') ?></span>
-                </a>
+                <div class="search-form mb-2">
+                    <?= $this->Form->create() ?>
 
-                <?= $this->element('Ypunto/Admin.paginator') ?>
+                    <div class="input-group mr-auto">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-search fa-fw"></i></span>
+                        </div>
+                        <?= $this->Form->search('search', ['placeholder' => __('Buscar {{ pluralHumanName }}')]) ?>
 
+                    </div>
+                    <?= $this->Form->end() ?>
+
+                </div>
+                <div class="ml-auto">
+                    <?= $this->element('Ypunto/Admin.paginator') ?>
+
+                </div>
             </div>
-            <div class="row ypunto-table-headers">
-                <div class="col col-id"><?= $this->Paginator->sort('{{ primaryKey[0] }}') ?></div>
+            <div class="ypunto-table-headers">
+                <div class="col col-id text-right"><?= $this->Paginator->sort('{{ primaryKey[0] }}', __('# Id.')) ?></div>
                 <div class="col col-display-field"><?= $this->Paginator->sort('{{ displayField }}') ?></div>
 {% if associationField %}
                 <div class="col-3 col-lg-2"><?= $this->Paginator->sort('{{ associationField.foreignKey }}') ?></div>

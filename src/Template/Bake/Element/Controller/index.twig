@@ -21,13 +21,28 @@
      */
     public function index()
     {
+        /** @var \Cake\Http\Response $response */
+        $response = $this->applyPrg($this->request, $this->response);
+        if ($response instanceof ResponseInterface) {
+            return $response;
+        }
+
 {% set belongsTo = Bake.aliasExtractor(modelObj, 'BelongsTo') %}
+        ${{ pluralName }} = $this->{{ currentModelName }}
 {% if belongsTo %}
-        $this->paginate = [
-            'contain' => [{{ Bake.stringifyList(belongsTo, {'indent': false})|raw }}],
-        ];
+            ->find()
+            ->contain([{{ Bake.stringifyList(belongsTo, {'indent': false})|raw }}]);
+{% else %}
+            ->find();
 {% endif %}
-        ${{ pluralName }} = $this->paginate($this->{{ currentModelName }});
+
+        if ($search = $this->request->getQuery('search')) {
+            ${{ pluralName }}->where(function (QueryExpression $exp) use ($search) {
+                return $exp->like('{{ currentModelName }}.{{ modelObj.getDisplayField() }}', "%{$search}%");
+            });
+        }
+
+        ${{ pluralName }} = $this->paginate(${{ pluralName }});
 
         $this->set(compact('{{ pluralName }}'));
     }

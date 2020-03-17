@@ -22,16 +22,11 @@ if ($isEdit && empty($entity)) {
 }
 ?>
 <?php if ($isEdit): ?>
-    <div class="card-body bg-light">
-        <ul class="list-unstyled text-muted small mb-0">
-            <li><i class="fas fa-fw fa-fingerprint"></i> <?= __('Id.') ?> <strong class="text-monospace"><?= $this->Number->format($entity->id) ?></strong></li>
-            <li><i class="far fa-fw fa-calendar-plus"></i> <?= __('Alta') ?> <strong><?= $entity->created ?></strong></li>
-            <li><i class="far fa-fw fa-calendar-check"></i> <?= __('Modificado') ?> <strong><?= $entity->modified ?></strong></li>
-        </ul>
-    </div>
+    <?= $this->element('Entity/info', compact('entity')) ?>
+
 <?php endif; ?>
 
-<div class="card-body border-top d-flex justify-content-betwee flex-row-reverse">
+<div class="card-body d-flex justify-content-betwee flex-row-reverse">
     <?= $this->Form->button(
         __('{icon} Guardar', ['icon' => '<i class="fas fa-fw fa-save"></i>']),
         ['escape' => false, 'class' => 'ml-auto']

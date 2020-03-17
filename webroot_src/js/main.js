@@ -1,3 +1,5 @@
+// ;const EventBus = new Vue();
+
 ;(function ($) {
     "use strict";
 
@@ -54,6 +56,13 @@
     }
 
     $(function () {
+        // new Vue({
+        //     el: '#app',
+        //     data: {
+        //         sidebarState: 'normal', // alt
+        //     },
+        // });
+
         $('body')
             .on('click', '[data-toggle=sidebar]', toggleSidebar)
             .on('change', '.custom-file-input', updateCustomFileLabel)

@@ -8,8 +8,10 @@
 namespace Ypunto\Admin\Bake;
 
 use Bake\View\BakeView;
+use Bake\View\Helper\BakeHelper;
 use Cake\Event\Event;
 use Cake\Event\EventListenerInterface;
+use Cake\ORM\Association;
 use Cake\ORM\Association\BelongsTo;
 use Cake\ORM\Association\BelongsToMany;
 use Cake\Utility\Hash;
@@ -49,26 +51,26 @@ class TemplateRenderFilter implements EventListenerInterface
     {
         return [
             'Bake.beforeRender' => 'beforeRender',
-            'Bake.beforeRender.Controller.controller' => 'beforeRenderController',
             'Bake.beforeRender.Model.table' => 'beforeRenderTable',
+            'Bake.beforeRender.Controller.controller' => 'beforeRenderController',
         ];
     }
 
     /**
-     * @param Event  $event
+     * @param Event $event
      */
     public function beforeRenderController(Event $event)
     {
         /** @var BakeView $view */
         $view = $event->getSubject();
-        //dump($view->get('actions'));
+        //dump($view->get('modelObj')->getDisplayField());
         //die();
 
         $view->set('primaryKey', $view->get('modelObj')->getPrimaryKey());
     }
 
     /**
-     * @param Event  $event
+     * @param Event $event
      */
     public function beforeRender(Event $event)
     {
@@ -97,21 +99,22 @@ class TemplateRenderFilter implements EventListenerInterface
     {
         /** @var BakeView $view */
         $view = $event->getSubject();
+
         $displayField = $view->get('displayField');
         $primaryKey = $view->get('primaryKey');
         $fields = $view->get('fields');
 
+        /** @todo Make this configurable */
+        $possibleDisplayFields = ['nombre', 'titulo', 'denominacion'];
+        $displayFieldCandidates = array_intersect($possibleDisplayFields, $fields);
 
-
-        /**
-         * Establecemos nombre
-         */
+        /** Establecemos un displayField más apropiado si es posible */
         if (
             in_array($displayField, $primaryKey) && // si tiene como displayField una primaryKey (default)
-            in_array('nombre', $fields) // y existe el campo nombre
+            !empty($displayFieldCandidates) // y existe algún campo candidato a displayField
         ) {
             // entonces establecemos nombre como displayField
-            $view->set('displayField', 'nombre');
+            $view->set('displayField', $displayFieldCandidates[0]);
         }
     }
 
@@ -145,7 +148,7 @@ class TemplateRenderFilter implements EventListenerInterface
             }
         }
 
-        /** @var \Bake\View\Helper\BakeHelper $bakeHelper */
+        /** @var BakeHelper $bakeHelper */
         $bakeHelper = $view->helpers()->get('Bake');
         // esto se hacía en la vista en los templates de bake, lo paso acá para filtrar antes de tomar 2 campos
         $fields = $bakeHelper->filterFields(
@@ -158,7 +161,7 @@ class TemplateRenderFilter implements EventListenerInterface
 
         // ahora nos queda seleccionar dos campos más, los dos primeros que aparezcan que no sean
         $otherListedFields = array_slice(array_diff($fields, $specialFields), 0, 2);
-        /** @todo parametrizar la cantidad de "otros" campos  */
+        /** @todo parametrizar la cantidad de "otros" campos */
 
         $view->set(compact('associationField', 'dropField', 'otherListedFields'));
     }
@@ -180,14 +183,14 @@ class TemplateRenderFilter implements EventListenerInterface
         $keyFields = $view->get('keyFields');
 
         $mainSectionFields = array_filter($fields, function ($field) use ($typeMap, $keyFields) {
-            return !in_array($typeMap[$field], ['integer', 'decimal']) || in_array($field, array_keys($keyFields));
+            return !in_array($typeMap[$field], ['integer', 'decimal', 'float', 'boolean']) || in_array($field, array_keys($keyFields));
         });
 
         $sideSectionFields = array_diff($fields, $mainSectionFields);
 
         $associationVarOptions = [];
         foreach ($view->get('modelObject')->associations() as $assoc) {
-            /** @var \Cake\ORM\Association $assoc */
+            /** @var Association $assoc */
             if (!in_array(get_class($assoc), [BelongsTo::class, BelongsToMany::class])) {
                 continue;
             }
@@ -203,7 +206,12 @@ class TemplateRenderFilter implements EventListenerInterface
      */
     protected function _prepareViewAction(BakeView $view)
     {
-        $associations = $view->get('associations') + ['BelongsTo' => [], 'HasOne' => [], 'HasMany' => [], 'BelongsToMany' => []];
+        $associations = $view->get('associations') + [
+                'BelongsTo' => [],
+                'HasOne' => [],
+                'HasMany' => [],
+                'BelongsToMany' => [],
+            ];
         $fields = $view->get('fields');
         $_pk = $view->get('primaryKey')[0];
 
@@ -211,7 +219,7 @@ class TemplateRenderFilter implements EventListenerInterface
             unset($fields[array_search($_pk, $fields)]);
         }
 
-        /** @var \Bake\View\Helper\BakeHelper $bakeHelper */
+        /** @var BakeHelper $bakeHelper */
         $bakeHelper = $view->helpers()->get('Bake');
         $fieldsData = $bakeHelper->getViewFieldsData($fields, $view->get('schema'), $associations);
 

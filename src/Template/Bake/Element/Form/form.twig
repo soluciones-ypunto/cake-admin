@@ -22,11 +22,11 @@
 {% if keyFields[field] %}
 {% set fieldData = Bake.columnData(field, schema) %}
 {% if fieldData.null %}
-            <?= $this->Form->control('{{ field }}', ['options' => ${{ keyFields[field] }}, 'empty' => true]) ?>
+            <?= $this->Form->control('{{ field }}', ['options' => ${{ keyFields[field] }}, 'empty' => true, 'custom' => true]) ?>
 {% else %}
-            <?= $this->Form->control('{{ field }}', ['options' => ${{ keyFields[field] }}]) ?>
+            <?= $this->Form->control('{{ field }}', ['options' => ${{ keyFields[field] }}, 'custom' => true]) ?>
 {% endif %}
-{% elseif field not in ['created', 'modified', 'updated'] %}
+{% elseif field not in ['created', 'modified', 'updated', 'deleted'] %}
 {% set fieldData = Bake.columnData(field, schema) %}
 {% if fieldData.type in ['date', 'datetime', 'time'] and fieldData.null %}
             <?= $this->Form->control('{{ field }}', ['empty' => true]) ?>
@@ -62,7 +62,12 @@
             <div class="card-body border-top">
                 <fieldset>
 {% for field in sideSectionFields if field not in primaryKey %}
+{% set fieldData = Bake.columnData(field, schema) %}
+{% if (fieldData.type == 'boolean') %}
+                    <?= $this->Form->control('{{ field }}', ['custom' => true]) ?>
+{% else %}
                     <?= $this->Form->control('{{ field }}') ?>
+{% endif %}
 {% endfor %}
                 </fieldset>
             </div>
@@ -70,7 +75,7 @@
 {% endif %}
 
         <div class="card ypunto-actions-card">
-            <?= $this->element('Form/actions', ['entity' => ${{ singularVar }}]) ?>
+            <?= $this->element('Entity/actions', ['entity' => ${{ singularVar }}]) ?>
 
         </div>
     </section>

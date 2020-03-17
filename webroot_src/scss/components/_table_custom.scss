@@ -75,6 +75,12 @@
 
     .drop-field {
       color: $text-muted;
+      // @todo
+      //overflow: hidden;
+      //white-space: nowrap;
+      //text-overflow: ellipsis;
+      //display: block;
+      //max-width: 300px;
     }
 
     &:hover {
@@ -94,8 +100,15 @@
     }
 
   }
+
   .actions {
     margin: 0 1rem 0 .5rem;
+  }
+}
+
+.related {
+  .ypunto-list-item .main-action .display-field {
+    font-weight: normal;
   }
 }
 
@@ -105,8 +118,9 @@
     padding: 0;
   }
 
+  .col-header,
   .col-actions {
-    display: block;
+    //display: block;
     padding: $spacer*.25 $spacer*.5;
     border-bottom: 2px solid $table-border-color;
     color: $gray-500;

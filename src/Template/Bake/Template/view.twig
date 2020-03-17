@@ -114,17 +114,8 @@
         </section>
         <section class="ypunto-view-aside">
             <div class="card ypunto-actions-card">
-                <div class="card-body bg-light">
-                    <ul class="list-unstyled text-muted small mb-0">
-                        <li><i class="fas fa-fw fa-fingerprint"></i> <?= __('Id.') ?> <strong class="text-monospace"><?= $this->Number->format({{ pK|raw }}) ?></strong></li>
-{% if created %}
-                        <li><i class="far fa-fw fa-calendar-plus"></i> <?= __('Alta') ?> <strong><?= ${{ singularVar }}->created ?></strong></li>
-{% endif %}
-{% if modified %}
-                        <li><i class="far fa-fw fa-calendar-check"></i> <?= __('Modificado') ?> <strong><?= ${{ singularVar }}->modified ?></strong></li>
-{% endif %}
-                    </ul>
-                </div>
+                <?= $this->element('Entity/info', ['entity' => ${{ singularVar }}]) ?>
+
             </div>
         </section>
     </div>
@@ -149,30 +140,34 @@
 {% for alias, details in relations %}
 {% set otherSingularVar = alias|variable %}
 {% set otherPluralHumanName = details.controller|underscore|humanize %}
-            <div class="tab-pane table-responsive fade{% if true == loop.first %} show active{% endif %}" id="{{ otherSingularVar }}" role="tabpanel" aria-labelledby="profile-tab">
-                <?php if (!empty(${{ singularVar }}->{{ details.property }})): ?>
-                <table class="table">
-                    <tr>
-{% for field in details.fields %}
-                        <th scope="col"><?= __('{{ field|humanize }}') ?></th>
-{% endfor %}
-                        <th scope="col" class="actions"><?= __('Actions') ?></th>
-                    </tr>
-                    <?php foreach (${{ singularVar }}->{{ details.property }} as ${{ otherSingularVar }}): ?>
-                    <tr>
-{% for field in details.fields %}
-                        <td><?= h(${{ otherSingularVar }}->{{ field }}) ?></td>
-{% endfor %}
 {% set otherPk = '$' ~ otherSingularVar ~ '->' ~ details.primaryKey[0] %}
-                        <td class="actions">
-                            <?= $this->Html->link(__('View'), ['controller' => '{{ details.controller }}', 'action' => 'view', {{ otherPk|raw }}]) ?>
-                            <?= $this->Html->link(__('Edit'), ['controller' => '{{ details.controller }}', 'action' => 'edit', {{ otherPk|raw }}]) ?>
-                            <?= $this->Form->postLink(__('Delete'), ['controller' => '{{ details.controller }}', 'action' => 'delete', {{ otherPk|raw }}], ['confirm' => __('Are you sure you want to delete # {0}?', {{ otherPk|raw }})]) ?>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
-                </table>
-                <?php endif; ?>
+        <div class="tab-pane table-responsive fade{% if true == loop.first %} show active{% endif %}" id="{{ otherSingularVar }}" role="tabpanel" aria-labelledby="profile-tab">
+            <?php if (!empty(${{ singularVar }}->{{ details.property }})): ?>
+                <div class="ypunto-table-headers">
+                    <div class="col col-header col-id text-right"><?= __('# Id.') ?></div>
+                    <div class="col col-header col-display-field"><?= __('{{ details.displayField|humanize }}') ?></div>
+                </div>
+                <?php foreach (${{ singularVar }}->{{ details.property }} as ${{ otherSingularVar }}): ?>
+                <div class="ypunto-list-item">
+                    <div class="col col-id"><?= $this->Number->format({{ otherPk|raw }}) ?></div>
+                    <div class="col col-display-field">
+                        <a class="main-action" href="<?= $this->Url->build(['controller' => '{{ details.controller }}', 'action' => 'view', {{ otherPk|raw }}]) ?>">
+                            <span class="display-field"><?= h(${{ otherSingularVar }}->{{ details.displayField }}) ?></span>
+                        </a>
+
+                        <div class="actions dropdown">
+                            <button class="btn btn-sm btn-outline-primary" type="button" id="menuBtn{{ alias }}-<?= {{ otherPk|raw }} ?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="menuBtn{{ alias }}-<?= {{ otherPk|raw }} ?>" data-boundary="window">
+                                <?= $this->Html->link(__('{icon} Ver', ['icon' => '<i class="far fa-fw fa-eye"></i>']), ['controller' => '{{ details.controller }}', 'action' => 'view', {{ otherPk|raw }}], ['class' => 'dropdown-item', 'escape' => false]) ?>
+                                <?= $this->Html->link(__('{icon} Editar', ['icon' => '<i class="fas fa-fw fa-pencil-alt"></i>']), ['controller' => '{{ details.controller }}', 'action' => 'edit', {{ otherPk|raw }}], ['class' => 'dropdown-item', 'escape' => false]) ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
             </div>
 {% endfor %}
         </div>

@@ -153,6 +153,14 @@ body {
   }
 }
 
+.form-group.datetime {
+  .form-control {
+    @include media-breakpoint-down(sm) {
+      margin-bottom: map_get($spacers, 2);
+    }
+  }
+}
+
 .ypunto-content {
   //max-width: $content-width;
 }

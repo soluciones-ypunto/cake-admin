@@ -19,7 +19,7 @@
                 <?= $this->Html->link(
                     sprintf('<i class="fas fa-fw fa-angle-left"></i> <span class="d-none d-sm-inline">%s</span>', __('Listado')),
                     ['action' => 'index'],
-                    ['class' => 'btn btn-sm btn-light-alt', 'escape' => false]
+                    ['class' => 'btn btn-sm btn-light-alt btn-responsive', 'escape' => false]
                 ) ?>
 
 {% endif %}
@@ -27,7 +27,7 @@
                 <?= $this->Html->link(
                     sprintf('<i class="fas fa-fw fa-plus"></i> <span class="d-none d-sm-inline">%s</span>', __('Crear {{ singularHumanName }}')),
                     ['action' => 'add'],
-                    ['class' => 'btn btn-sm btn-light-alt', 'escape' => false]
+                    ['class' => 'btn btn-sm btn-light-alt btn-responsive', 'escape' => false]
                 ) ?>
 
 {% endif %}
@@ -38,7 +38,7 @@
                 <?= $this->Html->link(
                     sprintf('<i class="fas fa-fw fa-pencil-alt"></i> <span class="d-none d-sm-inline">%s</span>', __('Editar')),
                     ['action' => 'edit', ${{ singularVar }}->{{ primaryKey[0] }}],
-                    ['class' => 'btn btn-sm btn-light-alt', 'escape' => false]
+                    ['class' => 'btn btn-sm btn-light-alt btn-responsive', 'escape' => false]
                 ) ?>
 
 {% endif %}
@@ -46,14 +46,14 @@
                 <?= $this->Html->link(
                     sprintf('<i class="fas fa-fw fa-eye"></i> <span class="d-none d-sm-inline">%s</span>', __('Ver')),
                     ['action' => 'view', ${{ singularVar }}->{{ primaryKey[0] }}],
-                    ['class' => 'btn btn-sm btn-light-alt', 'escape' => false]
+                    ['class' => 'btn btn-sm btn-light-alt btn-responsive', 'escape' => false]
                 ) ?>
 
 {% endif %}
                 <?= $this->Form->postLink(
                     sprintf('<i class="fas fa-fw fa-trash"></i> <span class="d-none d-sm-inline">%s</span>', __('Eliminar')),
                     ['action' => 'delete', ${{ singularVar }}->{{ primaryKey[0] }}],
-                    ['confirm' => __('Eliminar este registro?'), 'class' => 'btn btn-sm btn-light-alt text-danger', 'escape' => false]
+                    ['confirm' => __('Eliminar este registro?'), 'class' => 'btn btn-sm btn-light-alt btn-responsive text-danger', 'escape' => false]
                 ) ?>
 
             </div>

@@ -9,7 +9,10 @@
 //noinspection SassScssResolvedByNameOnly
 .bg-dark {
   .dropdown-divider {
-    @include nav-divider($dark);
+    height: 0;
+    margin: $dropdown-divider-margin-y 0;
+    overflow: hidden;
+    border-top: 1px solid $dark;
   }
   .dropdown-item {
     color: $gray-300;
