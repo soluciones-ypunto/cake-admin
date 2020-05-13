@@ -6,7 +6,7 @@
  */
 
 /**
- * @var \App\View\AppView $this
+ * @var \Cake\View\View $this
  * @var string            $message
  * @var array             $params
  */

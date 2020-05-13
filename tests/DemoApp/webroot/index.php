@@ -31,7 +31,7 @@ if (PHP_SAPI === 'cli-server') {
 
 require dirname(dirname(dirname(__DIR__))) . '/vendor/autoload.php';
 
-use App\Application;
+use DemoApp\Application;
 use Cake\Http\Server;
 
 // Bind your application to the server.

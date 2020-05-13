@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \App\View\AppView $this
+ * @var \DemoApp\View\AppView $this
  */
 
 $this->extend('Ypunto/Admin.default');

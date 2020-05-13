@@ -5,7 +5,7 @@
  * Time: 22:53
  */
 /**
- * @var \App\View\AppView $this
+ * @var \Cake\View\View $this
  * @var string            $message
  * @var array             $params
  */

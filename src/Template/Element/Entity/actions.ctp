@@ -4,7 +4,7 @@
  * Date: 13/3/20
  * Time: 12:58
  */
-/** @var \App\View\AppView $this */
+/** @var \Cake\View\View $this */
 
 use Cake\Utility\Inflector;
 

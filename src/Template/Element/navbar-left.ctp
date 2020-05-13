@@ -4,7 +4,7 @@
  * Date: 09/07/18
  * Time: 11:59
  */
-/** @var \App\View\AppView $this */
+/** @var \Cake\View\View $this */
 ?>
 <nav class="sidebar-nav">
     <h4>Ejemplos</h4>

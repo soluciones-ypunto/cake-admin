@@ -24,9 +24,7 @@
  * @var \{{ namespace }}\View\AppView $this
  * @var \{{ modelObject.getEntityClass() }} ${{ singularVar }}
 {% for var, entityClass in associationVarOptions %}
-{% if keyFields[var] %}
- * @var \{{ entityClass }}[]&\Cake\Datasource\ResultSetInterface ${{ keyFields[var] }}
-{% endif %}
+ * @var \{{ entityClass }}[]&\Cake\Datasource\ResultSetInterface ${{ var }}
 {% endfor %}
  */
 ?>

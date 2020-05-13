@@ -4,7 +4,7 @@
  * Date: 05/07/18
  * Time: 20:20
  */
-/** @var \App\View\AppView $this */
+/** @var \Cake\View\View $this */
 ?>
 <div class="row pt-3">
     <div class="col-md-8">

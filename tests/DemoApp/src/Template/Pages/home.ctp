@@ -30,7 +30,7 @@ endif;
 $cakeDescription = 'CakePHP: the rapid development PHP framework';
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -139,8 +139,9 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
             $connected = false;
             $errorMsg = $connectionError->getMessage();
             if (method_exists($connectionError, 'getAttributes')) :
+                /** @noinspection PhpPossiblePolymorphicInvocationInspection */
                 $attributes = $connectionError->getAttributes();
-                if (isset($errorMsg['message'])) :
+                if (is_array($errorMsg) && isset($errorMsg['message'])) :
                     $errorMsg .= '<br />' . $attributes['message'];
                 endif;
             endif;

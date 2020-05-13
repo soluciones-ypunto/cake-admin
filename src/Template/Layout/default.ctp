@@ -1,7 +1,6 @@
 <?php
-/** @noinspection PhpUnhandledExceptionInspection */
 /**
- * @var \App\View\AppView $this
+ * @var \Cake\View\View $this
  */
 
 use Cake\Core\Configure;

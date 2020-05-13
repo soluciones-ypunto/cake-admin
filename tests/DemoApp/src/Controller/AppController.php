@@ -12,10 +12,9 @@
  * @since     0.2.9
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace App\Controller;
+namespace DemoApp\Controller;
 
 use Cake\Controller\Controller;
-use Cake\Event\Event;
 
 /**
  * Application Controller
@@ -36,6 +35,7 @@ class AppController extends Controller
      * e.g. `$this->loadComponent('Security');`
      *
      * @return void
+     * @throws \Exception
      */
     public function initialize()
     {

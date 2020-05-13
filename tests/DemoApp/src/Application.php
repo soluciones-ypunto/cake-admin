@@ -12,7 +12,7 @@
  * @since     3.3.0
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace App;
+namespace DemoApp;
 
 use Cake\Core\Configure;
 use Cake\Core\Exception\MissingPluginException;
@@ -66,6 +66,7 @@ class Application extends BaseApplication
             // Catch any exceptions in the lower layers,
             // and make an error page/response
             ->add(new ErrorHandlerMiddleware(null, Configure::read('Error')))
+            //->add(new WhoopsHandlerMiddleware())
 
             // Handle plugin/theme assets like CakePHP normally does.
             ->add(new AssetMiddleware([

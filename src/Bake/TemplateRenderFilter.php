@@ -187,15 +187,23 @@ class TemplateRenderFilter implements EventListenerInterface
         });
 
         $sideSectionFields = array_diff($fields, $mainSectionFields);
-
+        $associations = $view->get('associations');
         $associationVarOptions = [];
+
         foreach ($view->get('modelObject')->associations() as $assoc) {
             /** @var Association $assoc */
-            if (!in_array(get_class($assoc), [BelongsTo::class, BelongsToMany::class])) {
-                continue;
+            switch (get_class($assoc)) {
+                case BelongsTo::class:
+                    $assocData = $associations['BelongsTo'][$assoc->getAlias()];
+                    break;
+                case BelongsToMany::class:
+                    $assocData = $associations['BelongsToMany'][$assoc->getAlias()];
+                    break;
+                default:
+                    continue 2;
             }
 
-            $associationVarOptions[$assoc->getForeignKey()] = $assoc->getTarget()->getEntityClass();
+            $associationVarOptions[$assocData['variable']] = $assoc->getTarget()->getEntityClass();
         }
 
         $view->set(compact('mainSectionFields', 'sideSectionFields', 'associationVarOptions'));

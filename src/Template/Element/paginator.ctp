@@ -5,7 +5,7 @@
  * Time: 09:01
  */
 /**
- * @var \App\View\AppView $this
+ * @var \Cake\View\View $this
  */
 
 /**

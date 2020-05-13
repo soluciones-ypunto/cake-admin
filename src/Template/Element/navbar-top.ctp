@@ -1,11 +1,10 @@
 <?php
-/** @noinspection PhpUnhandledExceptionInspection */
 /**
  * Created by javier
  * Date: 08/07/18
  * Time: 12:53
  *
- * @var \App\View\AppView $this
+ * @var \Cake\View\View $this
  */
 ?>
 
