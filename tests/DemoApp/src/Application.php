@@ -46,6 +46,7 @@ class Application extends BaseApplication
          * Debug Kit should not be installed on a production system
          */
         if (Configure::read('debug')) {
+            Configure::write('DebugKit.safeTld', ['loc']);
             $this->addPlugin(\DebugKit\Plugin::class);
         }
 

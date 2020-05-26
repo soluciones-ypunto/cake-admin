@@ -51,7 +51,7 @@ $plugin = strtolower($this->request->getParam('plugin'));
     'Ypunto/Admin.popper.min.js',
     'Ypunto/Admin.bootstrap.min.js',
     'Ypunto/Admin.jquery.stickybits.min.js',
-    sprintf('%s.js', Configure::read('debug') ? 'vue': 'vue.min'),
+    sprintf('Ypunto/Admin.%s.js', Configure::read('debug') ? 'vue': 'vue.min'),
 ]) ?>
 
 <?= $this->fetch('vue-components') ?>

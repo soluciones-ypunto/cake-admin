@@ -8,13 +8,15 @@
  * @var \Cake\View\View $this
  */
 
+use \Ypunto\Admin\View\Helper\PaginatorHelper;
+
 /**
  * GET forms will override params existing in query string, so we have to add them as hidden inputs
- * we keep everything but page because it can lead to an error if there is no such page for the current filters
+ * we keep everything but page and limit because there is an input for both of them
  *
  * @see https://stackoverflow.com/questions/1116019/submitting-a-get-form-with-query-string-params-and-hidden-params-disappear
  */
-$extraQueryParams = array_diff_key($this->request->getQueryParams(), ['page' => 1]);
+$extraQueryParams = array_diff_key($this->request->getQueryParams(), ['page' => 1, 'limit' => 1]);
 ?>
 <nav class="paginator row align-items-baseline" aria-label="<?= __('Paginación') ?>">
     <div class="pagination-form col-auto">
@@ -37,7 +39,8 @@ $extraQueryParams = array_diff_key($this->request->getQueryParams(), ['page' => 
         </span>
 
         <span class="page-info d-none d-md-block">
-            <?= $this->Paginator->limitControlAlone() ?> <?= __('por pág.') ?>
+            <?= ($this->Paginator instanceof PaginatorHelper) ? $this->Paginator->limitControlAlone() : $this->Paginator->limitControl() ?> <?= __('por pág.') ?>
+
         </span>
 
         <span class="page-info d-none d-md-block">
