@@ -54,7 +54,7 @@
 
 {% if associations %}
         if ($this->request->is('get') && ($queryParams = $this->request->getQueryParams())) {
-            ${{ singularName }} = $this->{{ currentModelName }}->patchEntity(${{ singularName }}, $queryParams); // @todo agregar fields whitelist
+            ${{ singularName }} = $this->{{ currentModelName }}->patchEntity(${{ singularName }}, $queryParams, ['validate' => false]); // @todo agregar fields whitelist
 
 {% for alias, details in assocs %}
 {% set assocPluralVar = details.getName()|variable %}
