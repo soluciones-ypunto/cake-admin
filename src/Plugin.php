@@ -12,7 +12,6 @@ use Ypunto\Admin\Bake\TemplateRenderFilter;
  */
 class Plugin extends BasePlugin
 {
-
     /**
      * {@inheritdoc}
      */

@@ -23,28 +23,51 @@
     public function add()
     {
         ${{ singularName }} = $this->{{ currentModelName }}->newEntity();
+
         if ($this->request->is('post')) {
             ${{ singularName }} = $this->{{ currentModelName }}->patchEntity(${{ singularName }}, $this->request->getData());
-            if ($this->{{ currentModelName }}->save(${{ singularName }})) {
-                $this->Flash->success(__('Se ha guardado!'));
 
+            if ($this->{{ currentModelName }}->save(${{ singularName }})) {
+                $this->Flash->success(__('Guardado correctamente!'));
+
+                $destination = ['action' => 'view', ${{ singularName }}->{{ primaryKey }}];
                 if ($this->request->getData('_nextAction') === 'add') {
-                    return $this->redirect(['action' => 'add']);
+                    $destination = $this->request->getRequestTarget();
                 }
 
-                return $this->redirect(['action' => 'view', ${{ singularName }}->{{ primaryKey }}]);
+                return $this->redirect($destination);
             }
+
             $this->Flash->error(__('No se pudo guardar. Revise los errores e inténtelo nuevamente.'));
         }
+
 {% set associations = Bake.aliasExtractor(modelObj, 'BelongsTo') %}
 {% set associations = associations|merge(Bake.aliasExtractor(modelObj, 'BelongsToMany')) %}
 
 {%- for assoc in associations %}
     {%- set otherName = Bake.getAssociatedTableAlias(modelObj, assoc) %}
     {%- set otherPlural = otherName|variable %}
-        ${{ otherPlural }} = $this->{{ currentModelName }}->{{ otherName }}->find('list', ['limit' => 200]);
+        ${{ otherPlural }} = $this->{{ currentModelName }}->{{ otherName }}->find('list')->limit(200);
         {{- "\n" }}
     {%- set compact = compact|merge(["'#{otherPlural}'"]) %}
 {% endfor %}
+
+{% if associations %}
+        if ($this->request->is('get') && ($queryParams = $this->request->getQueryParams())) {
+            ${{ singularName }} = $this->{{ currentModelName }}->patchEntity(${{ singularName }}, $queryParams); // @todo agregar fields whitelist
+
+{% for alias, details in assocs %}
+{% set assocPluralVar = details.getName()|variable %}
+{% set assocForeignKey = details.getForeignKey() %}
+{% if details.type == 'manyToOne' %}
+            if (${{ singularName }}->{{ assocForeignKey }}) { ${{ assocPluralVar }}->where(['{{ details.getTarget().getPrimaryKey() }}' => ${{ singularName }}->{{ assocForeignKey }}]); }
+{% endif %}
+{% if details.type == 'manyToMany' %}
+            if (!empty(${{ singularName }}->{{ assocPluralVar }})) { ${{ assocPluralVar }}->where(['{{ details.getTarget().getPrimaryKey() }} IN' => Hash::extract(${{ singularName }}->{{ assocPluralVar }}, '{n}.id')]); }
+{% endif %}
+{% endfor %}
+        }
+{% endif %}
+
         $this->set(compact({{ compact|join(', ')|raw }}));
     }

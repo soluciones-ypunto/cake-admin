@@ -61,12 +61,19 @@ class TemplateRenderFilter implements EventListenerInterface
      */
     public function beforeRenderController(Event $event)
     {
-        /** @var BakeView $view */
+        /**
+         * @var BakeView $view
+         * @var \Cake\ORM\Table $model
+         */
         $view = $event->getSubject();
-        //dump($view->get('modelObj')->getDisplayField());
-        //die();
+        $model = $view->get('modelObj');
+        $primaryKey = $model->getPrimaryKey();
+        $assocs = array_merge(
+            $model->associations()->getByType('belongsTo'),
+            $model->associations()->getByType('belongsToMany')
+        );
 
-        $view->set('primaryKey', $view->get('modelObj')->getPrimaryKey());
+        $view->set(compact('primaryKey', 'assocs'));
     }
 
     /**

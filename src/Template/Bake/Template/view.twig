@@ -29,7 +29,7 @@
 {#{% set fieldsData = Bake.getViewFieldsData(fields, schema, associations) %}#}
 {% set associationFields = fieldsData.associationFields %}
 {% set groupedFields = fieldsData.groupedFields %}
-{% set pK = '$' ~ singularVar ~ '->' ~ primaryKey[0] %}
+{#{% set pK = '$' ~ singularVar ~ '->' ~ primaryKey[0] %}#}
 
 <div class="ypunto-content {{ pluralVar }} view">
     <header class="ypunto-content-header">
@@ -122,6 +122,32 @@
 
 {% set relations = associations.BelongsToMany|merge(associations.HasMany) %}
 {% if relations %}
+    <div class="row align-items-center">
+        <div class="col-md-auto"><h4 class="mb-0 font-weight-light"><?= __('Vínculos') ?></h4></div>
+        <div class="col-md">
+            <div class="py-2">
+{% for alias, details in associations.BelongsToMany %}
+{% set otherSingularVar = alias|variable %}
+{% set otherPluralHumanName = details.controller|underscore|humanize %}
+                <?= $this->Html->link(
+                    __('{icon} {{ alias|singularize }}', ['icon' => '<i class="fas fa-plus fa-fw"></i>']),
+                    ['controller' => '{{ details.controller }}', 'action' => 'add', '?' => ['{{ pluralVar }}[_ids][]' => ${{ singularVar }}->{{ primaryKey[0] }}, '_redirect' => $this->request->getRequestTarget()]],
+                    ['class' => 'btn btn-sm btn-light-alt', 'escape' => false, 'title' => __('Agregar {{ alias|singularize }}')]
+                ) ?>
+{% endfor %}
+{% for alias, details in associations.HasMany %}
+{% set otherSingularVar = alias|variable %}
+{% set otherPluralHumanName = details.controller|underscore|humanize %}
+                <?= $this->Html->link(
+                    __('{icon} {{ alias|singularize }}', ['icon' => '<i class="fas fa-plus fa-fw"></i>']),
+                    ['controller' => '{{ details.controller }}', 'action' => 'add', '?' => ['{{ details.foreignKey }}' => ${{ singularVar }}->{{ primaryKey[0] }}, '_redirect' => $this->request->getRequestTarget()]],
+                    ['class' => 'btn btn-sm btn-light-alt', 'escape' => false, 'title' => __('Agregar {{ alias|singularize }}')]
+                ) ?>
+{% endfor %}
+            </div>
+        </div>
+    </div>
+
     <div class="card related">
         <div class="card-header ypunto-card-header-nav">
             <ul class="nav nav-pills card-header-pills">
@@ -141,9 +167,9 @@
 {% set otherSingularVar = alias|variable %}
 {% set otherPluralHumanName = details.controller|underscore|humanize %}
 {% set otherPk = '$' ~ otherSingularVar ~ '->' ~ details.primaryKey[0] %}
-        <div class="tab-pane table-responsive fade{% if true == loop.first %} show active{% endif %}" id="{{ otherSingularVar }}" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="tab-pane table-responsive fade{% if true == loop.first %} show active{% endif %}" id="{{ otherSingularVar }}" role="tabpanel" aria-labelledby="profile-tab">
             <?php if (!empty(${{ singularVar }}->{{ details.property }})): ?>
-                <div class="ypunto-table-headers">
+                <div class="ypunto-table-headers bg-light">
                     <div class="col col-header col-id text-right"><?= __('# Id.') ?></div>
                     <div class="col col-header col-display-field"><?= __('{{ details.displayField|humanize }}') ?></div>
                 </div>
@@ -155,14 +181,17 @@
                             <span class="display-field"><?= h(${{ otherSingularVar }}->{{ details.displayField }}) ?></span>
                         </a>
 
-                        <div class="actions dropdown">
-                            <button class="btn btn-sm btn-outline-primary" type="button" id="menuBtn{{ alias }}-<?= {{ otherPk|raw }} ?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="menuBtn{{ alias }}-<?= {{ otherPk|raw }} ?>" data-boundary="window">
-                                <?= $this->Html->link(__('{icon} Ver', ['icon' => '<i class="far fa-fw fa-eye"></i>']), ['controller' => '{{ details.controller }}', 'action' => 'view', {{ otherPk|raw }}], ['class' => 'dropdown-item', 'escape' => false]) ?>
-                                <?= $this->Html->link(__('{icon} Editar', ['icon' => '<i class="fas fa-fw fa-pencil-alt"></i>']), ['controller' => '{{ details.controller }}', 'action' => 'edit', {{ otherPk|raw }}], ['class' => 'dropdown-item', 'escape' => false]) ?>
-                            </div>
+                        <div class="actions btn-group btn-group-sm" role="group" aria-label="<?= __('Acciones') ?>">
+                            <?= $this->Html->link(
+                                sprintf('<i class="far fa-fw fa-eye"></i> <span class="d-none d-sm-inline">%s</span>', __('Ver')),
+                                ['controller' => '{{ details.controller }}', 'action' => 'view', {{ otherPk|raw }}],
+                                ['class' => 'btn btn-light-alt btn-responsive', 'escape' => false, 'title' => __('Ver')]
+                            ) ?>
+                            <?= $this->Html->link(
+                                sprintf('<i class="fas fa-fw fa-pencil-alt"></i> <span class="d-none d-sm-inline">%s</span>', __('Editar')),
+                                ['controller' => '{{ details.controller }}', 'action' => 'edit', {{ otherPk|raw }}, '?' => ['_redirect' => $this->request->getRequestTarget()]],
+                                ['class' => 'btn btn-light-alt btn-responsive', 'escape' => false, 'title' => __('Editar')]
+                            ) ?>
                         </div>
                     </div>
                 </div>

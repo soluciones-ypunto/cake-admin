@@ -21,10 +21,6 @@ if ($isEdit && empty($entity)) {
     $entity = !empty(${$_entityName}) ? ${$_entityName} : new \Cake\ORM\Entity();
 }
 ?>
-<?php if ($isEdit): ?>
-    <?= $this->element('Entity/info', compact('entity')) ?>
-
-<?php endif; ?>
 
 <div class="card-body d-flex justify-content-betwee flex-row-reverse">
     <?= $this->Form->button(
@@ -54,4 +50,9 @@ if ($isEdit && empty($entity)) {
             ]) ?>
         </p>
     </div>
+<?php endif; ?>
+
+<?php if ($isEdit): ?>
+    <?= $this->element('Entity/info', compact('entity')) ?>
+
 <?php endif; ?>

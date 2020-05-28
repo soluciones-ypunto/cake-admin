@@ -50,8 +50,8 @@ return [
     'App' => [
         'namespace' => 'DemoApp',
         'encoding' => env('APP_ENCODING', 'UTF-8'),
-        'defaultLocale' => env('APP_DEFAULT_LOCALE', 'en_US'),
-        'defaultTimezone' => env('APP_DEFAULT_TIMEZONE', 'UTC'),
+        'defaultLocale' => env('APP_DEFAULT_LOCALE', 'es_AR'),
+        'defaultTimezone' => env('APP_DEFAULT_TIMEZONE', 'America/Argentina/Buenos_Aires'),
         'base' => false,
         'dir' => 'src',
         'webroot' => 'webroot',

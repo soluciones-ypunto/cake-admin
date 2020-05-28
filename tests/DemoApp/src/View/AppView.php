@@ -14,8 +14,8 @@
 namespace DemoApp\View;
 
 use BootstrapUI\View\Helper\FormHelper;
-use Cake\View\View;
 use Ypunto\Admin\View\Helper\PaginatorHelper;
+use Ypunto\Admin\View\View;
 
 /**
  * Application View
@@ -29,7 +29,6 @@ use Ypunto\Admin\View\Helper\PaginatorHelper;
  */
 class AppView extends View
 {
-
     /**
      * Initialization hook method.
      *
