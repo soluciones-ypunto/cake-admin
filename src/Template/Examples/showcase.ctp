@@ -14,6 +14,15 @@
             illum impedit labore laboriosam laudantium maxime, nemo odio odit, quos recusandae suscipit vel.
             Beatae laudantium numquam voluptas.
         </p>
+        <h4>Íconos</h4>
+        <p class="lead">
+            <i class="fas fa-book-open fa-fw" title="fas fa-book-open"></i>
+            <i class="fas fa-head-side-cough-slash fa-fw" title="fas fa-head-side-cough-slash"></i>
+            <i class="fas fa-head-side-mask fa-fw" title="fas fa-head-side-mask"></i>
+            <i class="fas fa-virus fa-fw" title="fas fa-virus"></i>
+            <i class="fas fa-house-user fa-fw" title="fas fa-house-user"></i>
+            <i class="fas fa-satellite fa-fw" title="fas fa-satellite"></i>
+        </p>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut blanditiis commodi doloribus impedit maxime
             nesciunt non placeat porro? Consequatur culpa dicta numquam optio qui rerum! Amet consequuntur debitis
