@@ -47,7 +47,7 @@
 {%- for assoc in associations %}
     {%- set otherName = Bake.getAssociatedTableAlias(modelObj, assoc) %}
     {%- set otherPlural = otherName|variable %}
-        ${{ otherPlural }} = $this->{{ currentModelName }}->{{ otherName }}->find('list')->limit(200);
+        ${{ otherPlural }} = $this->{{ currentModelName }}->{{ otherName }}->find('list'); // ->limit(200); Considere establecer un límite
         {{- "\n" }}
     {%- set compact = compact|merge(["'#{otherPlural}'"]) %}
 {% endfor %}
@@ -60,10 +60,10 @@
 {% set assocPluralVar = details.getName()|variable %}
 {% set assocForeignKey = details.getForeignKey() %}
 {% if details.type == 'manyToOne' %}
-            if (${{ singularName }}->{{ assocForeignKey }}) { ${{ assocPluralVar }}->where(['{{ details.getTarget().getPrimaryKey() }}' => ${{ singularName }}->{{ assocForeignKey }}]); }
+            if (${{ singularName }}->{{ assocForeignKey }}) { ${{ assocPluralVar }}->where(['{{ details.getTarget().getAlias() }}.{{ details.getTarget().getPrimaryKey() }}' => ${{ singularName }}->{{ assocForeignKey }}]); }
 {% endif %}
 {% if details.type == 'manyToMany' %}
-            if (!empty(${{ singularName }}->{{ assocPluralVar }})) { ${{ assocPluralVar }}->where(['{{ details.getTarget().getPrimaryKey() }} IN' => Hash::extract(${{ singularName }}->{{ assocPluralVar }}, '{n}.id')]); }
+            if (!empty(${{ singularName }}->{{ assocPluralVar }})) { ${{ assocPluralVar }}->where(['{{ details.getTarget().getAlias() }}.{{ details.getTarget().getPrimaryKey() }} IN' => Hash::extract(${{ singularName }}->{{ assocPluralVar }}, '{n}.id')]); }
 {% endif %}
 {% endfor %}
         }
