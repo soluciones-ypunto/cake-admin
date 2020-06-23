@@ -80,6 +80,7 @@ body {
   background-color: $gray-200;
   color: $dark;
   letter-spacing: -.02rem;
+  //letter-spacing: -0.015em;
 }
 
 .ypunto-app {
@@ -159,6 +160,38 @@ body {
       margin-bottom: map_get($spacers, 2);
     }
   }
+}
+
+.form-group label:not(.custom-control-label):not(.form-check-label) {
+  color: $gray-600;
+}
+
+.custom-control-label,
+.form-check-label {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.custom-control-input {
+  $hover-box-shadow: 0 0 0 $input-btn-focus-width $gray-300;
+
+  &:hover ~ .custom-control-label::before {
+    // the mixin is not used here to make sure there is feedback
+    @if $enable-shadows {
+      box-shadow: $input-box-shadow, $hover-box-shadow;
+    } @else {
+      box-shadow: $hover-box-shadow;
+    }
+  }
+
+  &:hover:not(:checked) ~ .custom-control-label::before {
+    //border-color: $custom-control-indicator-focus-border-color;
+  }
+}
+
+.custom-control:not(.form-group) {
+  margin-bottom: map_get($spacers, 1);
 }
 
 .ypunto-content {

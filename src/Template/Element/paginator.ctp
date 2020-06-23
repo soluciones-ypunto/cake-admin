@@ -5,7 +5,7 @@
  * Time: 09:01
  */
 /**
- * @var \Cake\View\View $this
+ * @var \App\View\AppView $this
  */
 
 use \Ypunto\Admin\View\Helper\PaginatorHelper;

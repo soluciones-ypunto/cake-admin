@@ -199,3 +199,7 @@ Type::build('timestamp')
 //Inflector::rules('irregular', ['red' => 'redlings']);
 //Inflector::rules('uninflected', ['dontinflectme']);
 //Inflector::rules('transliteration', ['/å/' => 'aa']);
+
+class_alias(\DemoApp\View\AppView::class, '\\App\\View\\AppView');
+class_alias(\DemoApp\Controller\AppController::class, '\\App\\Controller\\AppController');
+

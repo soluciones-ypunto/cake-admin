@@ -40,7 +40,8 @@ class AppView extends View
      */
     public function initialize()
     {
-        $this->loadHelper('Paginator', ['className' => PaginatorHelper::class]);
+        $this->loadHelper('Html');
         $this->loadHelper('Form', ['className' => FormHelper::class]);
+        $this->loadHelper('Paginator', ['className' => PaginatorHelper::class]);
     }
 }

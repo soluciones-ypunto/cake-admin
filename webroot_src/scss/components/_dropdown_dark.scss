@@ -1,12 +1,10 @@
 
-//noinspection SassScssResolvedByNameOnly
 .dropdown-menu.bg-dark {
   color: $navbar-dark-color;
   background-color: darken($dark, 5%) !important;
   border: $dropdown-border-width solid $dropdown-border-color;
 }
 
-//noinspection SassScssResolvedByNameOnly
 .bg-dark {
   .dropdown-divider {
     height: 0;

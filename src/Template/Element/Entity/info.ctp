@@ -5,7 +5,7 @@
  * Time: 19:50
  */
 /**
- * @var \Cake\View\View $this
+ * @var \App\View\AppView $this
  * @var \Cake\Datasource\EntityInterface $entity
  */
 ?>

@@ -2,7 +2,7 @@
 
 namespace Ypunto\Admin\Controller;
 
-use \Cake\Controller\Controller as BaseController;
+use \App\Controller\AppController as BaseController;
 
 class AppController extends BaseController
 {

@@ -4,7 +4,7 @@
  * Date: 08/07/18
  * Time: 12:53
  *
- * @var \Cake\View\View $this
+ * @var \App\View\AppView $this
  */
 ?>
 

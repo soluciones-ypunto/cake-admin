@@ -4,7 +4,7 @@
  * Date: 09/07/18
  * Time: 23:44
  */
-/** @var \Cake\View\View $this */
+/** @var \App\View\AppView $this */
 ?>
 <div class="content-inner">
     <header class="content-header">
