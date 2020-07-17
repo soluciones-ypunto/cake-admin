@@ -27,24 +27,10 @@ $plugin = strtolower($this->request->getParam('plugin'));
 <body>
 
 <div class="ypunto-app<?= $plugin ? " ypunto-plugin-{$plugin}" : null ?>">
-    <?= $this->fetch('navbar-top', $this->element('Ypunto/Admin.navbar-top')) ?>
+    <?= $this->Flash->render() ?>
 
-    <div class="ypunto-main">
-        <nav id="sidebarLeft" role="navigation" class="sidebar sidebar-dark" data-toggle="sidebar" data-target="this">
-            <div class="sidebar-content">
-                <?= $this->fetch('navbar-left', $this->element('Ypunto/Admin.navbar-left')) ?>
+    <?= $this->fetch('content') ?>
 
-            </div>
-        </nav>
-        <main role="main" class="content">
-            <?= $this->Flash->render() ?>
-
-            <?= $this->fetch('content') ?>
-
-        </main>
-    </div>
-    <div class="ypunto-footer">
-    </div>
 </div>
 
 <?= $this->Html->script([
@@ -52,7 +38,7 @@ $plugin = strtolower($this->request->getParam('plugin'));
     'Ypunto/Admin.popper.min.js',
     'Ypunto/Admin.bootstrap.min.js',
     'Ypunto/Admin.jquery.stickybits.min.js',
-    sprintf('Ypunto/Admin.%s.js', Configure::read('debug') ? 'vue': 'vue.min'),
+    sprintf('Ypunto/Admin.%s.js', Configure::read('debug') ? 'vue' : 'vue.min'),
 ]) ?>
 
 <?= $this->fetch('vue-components') ?>
