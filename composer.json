@@ -27,6 +27,7 @@
   "autoload-dev": {
     "psr-4": {
       "DemoApp\\": "tests/DemoApp/src/",
+      "DemoPlugin\\": "tests/DemoApp/plugins/DemoPlugin/src",
       "Ypunto\\Admin\\Test\\": "tests/",
       "Cake\\Test\\": "vendor/cakephp/cakephp/tests/"
     }

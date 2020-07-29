@@ -27,12 +27,12 @@ $plugin = strtolower($this->request->getParam('plugin'));
 <body>
 
 <div class="ypunto-app<?= $plugin ? " ypunto-plugin-{$plugin}" : null ?>">
-    <?= $this->fetch('navbar-top', $this->element('Ypunto/Admin.navbar-top')) ?>
+    <?= $this->fetch('navbar-top') ?: $this->element('Ypunto/Admin.navbar-top') ?>
 
     <div class="ypunto-main">
         <nav id="sidebarLeft" role="navigation" class="sidebar sidebar-dark" data-toggle="sidebar" data-target="this">
             <div class="sidebar-content">
-                <?= $this->fetch('navbar-left', $this->element('Ypunto/Admin.navbar-left')) ?>
+                <?= $this->fetch('navbar-left') ?: $this->element('Ypunto/Admin.navbar-left') ?>
 
             </div>
         </nav>
