@@ -30,7 +30,7 @@ services:
 #      MYSQL_DATABASE: "${DB_NAME}"
 #      MYSQL_USER: "${DB_USERNAME}"
 #      MYSQL_PASSWORD: "${DB_PASSWORD}"
-#
+
 #  pma:
 #    image: phpmyadmin/phpmyadmin
 #    expose:

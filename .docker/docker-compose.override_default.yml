@@ -7,7 +7,7 @@ version: '3'
 services:
   web:
     environment:
-      VIRTUAL_HOST: plus.casinostafe.loc
+      VIRTUAL_HOST: ypunto_admin.local
     networks:
       - default
       - proxy
@@ -17,13 +17,13 @@ services:
       DEBUG: 1
       DATABASE_TEST_URL: "mysql://root:${DB_ROOT_PASSWORD}@db/test"
 
-  db:
-    ports:
-      - 3306:3306
-
-  pma:
-    ports:
-      - 8080:80
+#  db:
+#    ports:
+#      - 3306:3306
+#
+#  pma:
+#    ports:
+#      - 8080:80
 
 networks:
   proxy:
