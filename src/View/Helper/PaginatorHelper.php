@@ -59,7 +59,7 @@ class PaginatorHelper extends \Cake\View\Helper\PaginatorHelper
     /**
      * @param array $config
      */
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         parent::initialize($config);
 

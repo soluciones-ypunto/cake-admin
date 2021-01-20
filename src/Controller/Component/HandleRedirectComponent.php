@@ -24,7 +24,7 @@ class HandleRedirectComponent extends Component
      * @param          $url
      * @param Response $response
      */
-    public function beforeRedirect(Event $event, $url, Response $response)
+    public function beforeRedirect(\Cake\Event\EventInterface $event, $url, Response $response)
     {
         $destination = new ServerRequest($url);
         $redirect = $this->getController()->getRequest()->getQuery('_redirect');

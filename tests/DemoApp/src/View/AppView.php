@@ -38,7 +38,7 @@ class AppView extends View
      *
      * @return void
      */
-    public function initialize()
+    public function initialize(): void
     {
         $this->loadHelper('Html');
         $this->loadHelper('Form', ['className' => FormHelper::class]);
