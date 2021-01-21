@@ -5,27 +5,16 @@
 
 version: '3'
 services:
-  web:
+  app:
     environment:
-      VIRTUAL_HOST: ypunto_admin.local
+      VIRTUAL_HOST: admin.ypunto.loc
+      DEBUG: 1
     networks:
       - default
       - proxy
-
-  php:
-    environment:
-      DEBUG: 1
-      DATABASE_TEST_URL: "mysql://root:${DB_ROOT_PASSWORD}@db/test"
-
-#  db:
-#    ports:
-#      - 3306:3306
-#
-#  pma:
-#    ports:
-#      - 8080:80
 
 networks:
   proxy:
     external:
       name: nginx-proxy
+

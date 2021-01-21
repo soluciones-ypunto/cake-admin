@@ -1,37 +1,14 @@
 version: '3'
 services:
-  web:
-    image: nginx
+  app:
+    image: webdevops/php-nginx:7.4
     volumes:
-      - "./default.conf:/etc/nginx/conf.d/default.conf"
-      - "../:/var/www/html"
-#    expose:
-#      - 80
-
-  php:
-    image: ypunto/php-fpm
-    volumes:
-      - "../:/var/www/html"
+      - "../:/app"
       - "~/.cache/_docker-user:/home/user"
     environment:
       DEBUG: 0
-      DATABASE_URL: "sqlite:////var/www/html/tests/DemoApp/tmp/db.sqlite"
-      DATABASE_TEST_URL: "sqlite:////var/www/html/tests/DemoApp/tmp/db_test.sqlite"
-    user: "1000:1000"
+      DATABASE_URL: "sqlite:////app/tests/DemoApp/tmp/db.sqlite"
+      DATABASE_TEST_URL: "sqlite:////app/tests/DemoApp/tmp/db_test.sqlite"
+      WEB_DOCUMENT_ROOT: /app/tests/DemoApp/webroot
+#    user: "1000:1000"
 
-#  db:
-#    image: mysql:5.7
-#    volumes:
-#      - "./db:/var/lib/mysql"
-#    expose:
-#      - 3306
-#    environment:
-#      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
-#      MYSQL_DATABASE: "${DB_NAME}"
-#      MYSQL_USER: "${DB_USERNAME}"
-#      MYSQL_PASSWORD: "${DB_PASSWORD}"
-
-#  pma:
-#    image: phpmyadmin/phpmyadmin
-#    expose:
-#      - 80
