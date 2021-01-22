@@ -53,7 +53,7 @@ $extraQueryParams = array_diff_key($this->request->getQueryParams(), ['page' => 
                 ),
             ]) ?>
 
-            <?= $this->Paginator->counter(['format' => __('de {{pages}}')]) ?>
+            <?= $this->Paginator->counter(__('de {{pages}}')) ?>
 
         </span>
         <?= $this->Form->end() ?>

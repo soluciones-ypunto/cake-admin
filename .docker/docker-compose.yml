@@ -4,11 +4,10 @@ services:
     image: webdevops/php-nginx:7.4
     volumes:
       - "../:/app"
-      - "~/.cache/_docker-user:/home/user"
     environment:
       DEBUG: 0
       DATABASE_URL: "sqlite:////app/tests/DemoApp/tmp/db.sqlite"
       DATABASE_TEST_URL: "sqlite:////app/tests/DemoApp/tmp/db_test.sqlite"
       WEB_DOCUMENT_ROOT: /app/tests/DemoApp/webroot
-#    user: "1000:1000"
+    user: "1000:1000"
 

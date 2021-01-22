@@ -25,14 +25,14 @@ if ($isEdit && empty($entity)) {
 <div class="card-body d-flex justify-content-betwee flex-row-reverse">
     <?= $this->Form->button(
         __('{icon} Guardar', ['icon' => '<i class="fas fa-fw fa-save"></i>']),
-        ['escape' => false, 'class' => 'ml-auto']
+        ['escapeTitle' => false, 'class' => 'ml-auto']
     ) ?>
 
     <?php if ($isAdd): ?>
         <?= $this->Form->button(
             '<i class="fas fa-save"></i><i class="fas fa-plus-square fa-fw"></i>',
             [
-                'escape' => false,
+                'escapeTitle' => false,
                 'class'  => 'btn-light-alt',
                 'title'  => __('Guarda el registro y pasa a crear uno nuevo'),
                 'name'   => '_nextAction',

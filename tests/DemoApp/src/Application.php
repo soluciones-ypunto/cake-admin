@@ -59,12 +59,13 @@ class Application extends BaseApplication
          * Debug Kit should not be installed on a production system
          */
         if (Configure::read('debug')) {
+            Configure::write('DebugKit.forceEnable', true);
             $this->addPlugin('DebugKit');
         }
 
         // Load more plugins here
         $this->addPlugin(\Ypunto\Admin\Plugin::class);
-        //$this->addPlugin(\SpanishInflections\Plugin::class);
+        $this->addPlugin(\SpanishInflections\Plugin::class);
     }
 
     /**
