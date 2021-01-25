@@ -14,3 +14,7 @@ src/Template/Cosas
 src/Template/Entidades
 src/Template/Etiquetas
 src/Template/Grupos
+templates/Cosas
+templates/Entidades
+templates/Etiquetas
+templates/Grupos

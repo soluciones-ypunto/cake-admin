@@ -47,7 +47,7 @@ class TemplateRenderFilter implements EventListenerInterface
      * @return array associative array or event key names pointing to the function
      * that should be called in the object when the respective event is fired
      */
-    public function implementedEvents()
+    public function implementedEvents(): array
     {
         return [
             'Bake.beforeRender' => 'beforeRender',
@@ -91,6 +91,7 @@ class TemplateRenderFilter implements EventListenerInterface
                 break;
             case 'add':
             case 'edit':
+            case '_form':
                 $this->_prepareFormAction($view);
                 break;
             case 'view':
@@ -140,7 +141,7 @@ class TemplateRenderFilter implements EventListenerInterface
         }
 
         $specialFields = array_unique(array_merge(
-            [$associationField['foreignKey'], $view->get('displayField')],
+            [$view->get('displayField')],
             $foreignKeys,
             $view->get('primaryKey')
         ));

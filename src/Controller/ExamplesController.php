@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  * Created by javier
  * Date: 05/07/18
@@ -10,6 +12,7 @@ namespace Ypunto\Admin\Controller;
 use Cake\Event\Event;
 use Cake\Form\Form;
 use Cake\Form\Schema;
+use Cake\Http\Response;
 use Cake\Validation\Validator;
 
 class ExamplesController extends AppController
@@ -33,13 +36,13 @@ class ExamplesController extends AppController
     }
 
     /**
-     * @return \Cake\Http\Response|void
+     * @return Response|void
      */
     public function forms()
     {
         $form = new class extends Form {
 
-            protected function _buildSchema(Schema $schema)
+            protected function _buildSchema(Schema $schema): Schema
             {
                 return $schema
                     ->addField('nombre', ['type' => 'string'])
@@ -53,7 +56,7 @@ class ExamplesController extends AppController
                 ;
             }
 
-            public function buildValidator(Event $event, Validator $validator, $name)
+            public function buildValidator(Event $event, Validator $validator, $name): Validator
             {
                 $validator
                     ->notEmptyString('nombre')
@@ -64,7 +67,7 @@ class ExamplesController extends AppController
                 return $validator;
             }
 
-            protected function _execute(array $data)
+            protected function _execute(array $data):  bool
             {
                 return true;
             }

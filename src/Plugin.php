@@ -15,13 +15,13 @@ class Plugin extends BasePlugin
     /**
      * {@inheritdoc}
      */
-    public function bootstrap(PluginApplicationInterface $app)
+    public function bootstrap(PluginApplicationInterface $app): void
     {
         /**
          * Agregamos los templates del plugin a los paths de búsqueda
          */
         $paths = Configure::read('App.paths.templates');
-        array_push($paths, $this->getPath() . 'src' . DS . 'Template' . DS);
+        array_push($paths, $this->getPath() . 'templates' . DS);
         Configure::write('App.paths.templates', $paths);
         unset($paths);
 

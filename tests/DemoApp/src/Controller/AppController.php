@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -15,6 +17,7 @@
 namespace DemoApp\Controller;
 
 use Cake\Controller\Controller;
+use Exception;
 
 /**
  * Application Controller
@@ -34,9 +37,9 @@ class AppController extends Controller
      * e.g. `$this->loadComponent('Security');`
      *
      * @return void
-     * @throws \Exception
+     * @throws Exception
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
 
