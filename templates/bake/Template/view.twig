@@ -155,8 +155,8 @@
 {% set otherSingularVar = alias|variable %}
 {% set otherPluralHumanName = details.controller|underscore|humanize %}
                 <li class="nav-item">
-                    <a class="nav-link{% if true == loop.first %} active{% endif %}" data-toggle="tab" href="#{{ otherSingularVar }}" role="tab" aria-controls="{{ otherSingularVar }}"{% if true == loop.first %} aria-selected="true"{% endif %}>
-                        <?= __('{{ otherPluralHumanName }}') ?> <span class="badge badge-pill badge-success ml-2"><?= count(${{ singularVar }}->{{ details.property }}) ?></span>
+                    <a class="nav-link{% if true == loop.first %} active{% endif %}" data-bs-toggle="tab" href="#{{ otherSingularVar }}" role="tab" aria-controls="{{ otherSingularVar }}"{% if true == loop.first %} aria-selected="true"{% endif %}>
+                        <?= __('{{ otherPluralHumanName }}') ?> <span class="badge rounded-pill bg-success ms-2"><?= count(${{ singularVar }}->{{ details.property }}) ?></span>
                     </a>
                 </li>
 {% endfor %}

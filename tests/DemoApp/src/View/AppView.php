@@ -13,7 +13,7 @@
  */
 namespace DemoApp\View;
 
-use BootstrapUI\View\Helper\FormHelper;
+use Ypunto\Admin\View\Helper\FormHelper;
 use Ypunto\Admin\View\Helper\PaginatorHelper;
 use Ypunto\Admin\View\View;
 

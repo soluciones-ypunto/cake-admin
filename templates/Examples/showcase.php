@@ -102,7 +102,7 @@
     labore maxime totam.
 </p>
 <p class="text-center">
-    <a href="#modal" class="btn btn-primary btn-lg" data-toggle="modal">Abril Modal</a>
+    <a href="#modal" class="btn btn-primary btn-lg" data-bs-toggle="modal">Abril Modal</a>
 </p>
 <hr>
 <div class="row">

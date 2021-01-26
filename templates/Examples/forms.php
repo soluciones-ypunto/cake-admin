@@ -48,7 +48,7 @@
                     <?= $this->Form->control('etiquetas', [
                         'multiple' => 'checkbox',
                         'options' => $etiquetas,
-                        'custom' => true,
+                        //'custom' => true,
                         'inline' => true,
                     ]) ?>
 
@@ -57,7 +57,7 @@
                     <?= $this->Form->control('etiqueta_principal', [
                         'type' => 'radio',
                         'options' => $etiquetas,
-                        'custom' => true,
+                        //'custom' => true,
                         'inline' => true,
                     ]) ?>
 
@@ -122,18 +122,18 @@
             </div>
             <div class="card-body border-top">
                 <fieldset>
-                    <?= $this->Form->control('habilitado', ['custom' => true]) ?>
+                    <?= $this->Form->control('habilitado') ?>
                     <?= $this->Form->control('cantidad') ?>
                     <?= $this->Form->control('marca', [
                         'options' => $marcas,
-                        'custom' => true,
+                        //'custom' => true,
                         'empty' => '— Seleccione marca'
                     ]) ?>
                     <?= $this->Form->control('marca_confirm', [
                         'label' => 'Input Radio',
                         'options' => $marcas,
                         'type' => 'radio',
-                        'custom' => true,
+                        //'custom' => true,
                     ]) ?>
 
                 </fieldset>

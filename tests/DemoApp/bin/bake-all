@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd tests/DemoApp/bin;
+cd /app/tests/DemoApp/bin;
 
 tableObjects=( Cosas Entidades Etiquetas Grupos );
 

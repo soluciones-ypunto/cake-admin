@@ -37,13 +37,13 @@
         <li class="nav-item">
             <a class="nav-link" href="#">
                 <i class="fas fa-wallet fa-fw"></i> Un listado
-                <span class="badge badge-pill badge-primary float-right">19</span>
+                <span class="badge rounded-pill bg-primary float-right">19</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">
                 <i class="fas fa-object-group fa-fw"></i> Otro listado
-                <span class="badge badge-pill badge-danger float-right">4</span>
+                <span class="badge rounded-pill bg-danger float-right">4</span>
             </a>
         </li>
         <li class="nav-item">

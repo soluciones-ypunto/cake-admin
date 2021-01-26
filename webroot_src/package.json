@@ -15,7 +15,7 @@
   "license": "propietary",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
-    "bootstrap": "^4.5.0",
+    "bootstrap": "^5.0.0-beta1",
     "jquery": "^3.5.1",
     "popper.js": "^1.14.7",
     "stickybits": "^3.6.2",

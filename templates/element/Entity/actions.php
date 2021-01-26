@@ -25,7 +25,7 @@ if ($isEdit && empty($entity)) {
 <div class="card-body d-flex justify-content-betwee flex-row-reverse">
     <?= $this->Form->button(
         __('{icon} Guardar', ['icon' => '<i class="fas fa-fw fa-save"></i>']),
-        ['escapeTitle' => false, 'class' => 'ml-auto']
+        ['escapeTitle' => false, 'class' => 'ms-auto']
     ) ?>
 
     <?php if ($isAdd): ?>

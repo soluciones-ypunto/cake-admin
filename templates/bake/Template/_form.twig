@@ -37,7 +37,7 @@
 {% if field not in primaryKey %}
 {% if keyFields[field] %}
 {% set fieldData = Bake.columnData(field, schema) %}
-        <?= $this->Form->control('{{ field }}', ['options' => ${{ keyFields[field] }}, 'custom' => true
+        <?= $this->Form->control('{{ field }}', ['options' => ${{ keyFields[field] }}
     {%- if fieldData.null %}, 'empty' => true{% endif %}
     {%- if true == loop.first %}, 'autofocus'{% endif %}]) ?>
 {% elseif field not in ['created', 'modified', 'updated', 'deleted'] %}
@@ -79,11 +79,7 @@
 {% for field in sideSectionFields %}
 {% if field not in primaryKey %}
 {% set fieldData = Bake.columnData(field, schema) %}
-{% if (fieldData.type == 'boolean') %}
-                <?= $this->Form->control('{{ field }}', ['custom' => true]) ?>
-{% else %}
                 <?= $this->Form->control('{{ field }}') ?>
-{% endif %}
 {% endif %}
 {% endfor %}
             </fieldset>
