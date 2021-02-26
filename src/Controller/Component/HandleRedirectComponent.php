@@ -8,10 +8,13 @@
 namespace Ypunto\Admin\Controller\Component;
 
 use Cake\Controller\Component;
-use Cake\Event\Event;
+use Cake\Event\EventInterface;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
 use Cake\Routing\Router;
+use Laminas\Diactoros\Uri;
+use Laminas\Diactoros\UriFactory;
+use Psr\Http\Message\UriInterface;
 
 /**
  * Class HandleRedirectComponent
@@ -20,13 +23,21 @@ use Cake\Routing\Router;
 class HandleRedirectComponent extends Component
 {
     /**
-     * @param Event    $event
-     * @param          $url
-     * @param Response $response
+     * @param EventInterface            $event
+     * @param string|array|UriInterface $url
+     * @param Response                  $response
      */
-    public function beforeRedirect(\Cake\Event\EventInterface $event, $url, Response $response)
+    public function beforeRedirect(EventInterface $event, $url, Response $response)
     {
-        $destination = new ServerRequest($url);
+        if (is_array($url)) {
+            $url = Router::url($url);
+        }
+
+        if (is_string($url)) {
+            $url = new Uri($url);
+        }
+
+        $destination = new ServerRequest(['uri' => $url]);
         $redirect = $this->getController()->getRequest()->getQuery('_redirect');
 
         /**
