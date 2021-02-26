@@ -8,7 +8,6 @@
 namespace Ypunto\Admin\Controller\Component;
 
 use Cake\Controller\Component;
-use Cake\Event\Event;
 use Cake\Event\EventInterface;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
