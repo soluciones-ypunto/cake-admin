@@ -13,7 +13,6 @@ use Cake\Http\Response;
 use Cake\Http\ServerRequest;
 use Cake\Routing\Router;
 use Laminas\Diactoros\Uri;
-use Laminas\Diactoros\UriFactory;
 use Psr\Http\Message\UriInterface;
 
 /**
