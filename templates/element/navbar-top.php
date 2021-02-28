@@ -42,11 +42,9 @@
             <form class="form-inline form-search">
                 <div class="input-group input-group-sm w-100">
                     <input class="form-control" type="search" placeholder="<?= __d('admin-ypunto', 'Buscar') ?>" aria-label="<?= __d('admin-ypunto', 'Buscar') ?>">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="button">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
+                    <button class="btn btn-outline-primary" type="button">
+                        <i class="fas fa-search"></i>
+                    </button>
                 </div>
             </form>
         </div>

@@ -2,4 +2,3 @@
 /phpunit.xml
 /vendor
 /.idea
-/webroot_src/node_modules

@@ -6,19 +6,20 @@ const rename = require('gulp-rename');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const path = require('path');
-const __webrootdir = path.resolve(__dirname, '../webroot');
+const __webrootdir = path.resolve(__dirname, '../../webroot');
 
 // javascripts
 // -----------------------------------------------------------------------------------------------------
 gulp.task('copy-js', () => {
     return gulp
         .src([
-            'node_modules/vue/dist/vue.js',
-            'node_modules/vue/dist/vue.min.js',
+            'node_modules/vue/dist/vue.global.js',
+            'node_modules/vue/dist/vue.global.prod.js',
             'node_modules/jquery/dist/jquery.min.js',
-            'node_modules/popper.js/dist/umd/popper.min.js',
-            'node_modules/bootstrap/dist/js/bootstrap.min.js',
-            'node_modules/stickybits/dist/jquery.stickybits.min.js',
+            'node_modules/bootstrap/dist/js/bootstrap.bundle.js',
+            'node_modules/bootstrap/dist/js/bootstrap.bundle.js.map',
+            'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
+            'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js.map',
             'js/main.js',
         ])
         .pipe(gulp.dest(path.resolve(__webrootdir, 'js')))
