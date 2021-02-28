@@ -79,7 +79,7 @@
                     <button class="btn btn-sm btn-outline-primary" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-ellipsis-v"></i>
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" data-boundary="window">
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton" data-bs-boundary="window">
                         <?= $this->Html->link(__('{icon} Ver', ['icon' => '<i class="far fa-fw fa-eye"></i>']), ['action' => 'view', {{ pk|raw }}], ['class' => 'dropdown-item', 'escape' => false]) ?>
                         <?= $this->Html->link(__('{icon} Editar', ['icon' => '<i class="fas fa-fw fa-pencil-alt"></i>']), ['action' => 'edit', {{ pk|raw }}], ['class' => 'dropdown-item', 'escape' => false]) ?>
                         <div class="dropdown-divider"></div>
