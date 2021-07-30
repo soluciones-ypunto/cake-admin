@@ -15,7 +15,7 @@
   .dropdown-item {
     color: $gray-300;
 
-    @include hover-focus {
+    &:hover, &:focus {
       color: $gray-100;
       text-decoration: none;
       @include gradient-bg(darken($dark, 10%));

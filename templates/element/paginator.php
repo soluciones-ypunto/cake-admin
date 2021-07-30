@@ -22,28 +22,29 @@ $extraQueryParams = array_diff_key($this->request->getQueryParams(), ['page' => 
     <div class="pagination-form col-auto">
         <?= $this->Form->create(null, [
             'type' => 'get',
-            'class' => 'form-inline force-form-inline',
+            'class' => 'form-inline row row-cols-auto gx-3 align-items-baseline',
             'onsubmit' => sprintf(
                 'this.page.value = Math.min(parseInt(this.page.value) || 1, %s)',
                 $this->Paginator->param('pageCount')
             ),
         ]) ?>
 
-        <?php foreach ($extraQueryParams as $_key => $value):
-            echo $this->Form->hidden($_key, compact('value')) . PHP_EOL;
-        endforeach; ?>
+        <?= $this->Form->hiddenFields($extraQueryParams) . PHP_EOL ?>
 
         <span class="page-info">
             <?= $this->Paginator->counter('range') ?>
 
         </span>
 
-        <span class="page-info d-none d-md-block">
-            <?= ($this->Paginator instanceof PaginatorHelper) ? $this->Paginator->limitControlAlone() : $this->Paginator->limitControl() ?> <?= __('por pág.') ?>
+        <span class="page-info d-none d-md-block text-nowrap">
+            <?= ($this->Paginator instanceof PaginatorHelper) ?
+                $this->Paginator->limitControlAlone([], null, ['class' => 'd-inline-block w-auto']) :
+                $this->Paginator->limitControl([], null, ['class' => 'd-inline-block w-auto']) ?>
 
+            <span><?= __('por pág.') ?></span>
         </span>
 
-        <span class="page-info d-none d-md-block">
+        <span class="page-info d-none d-md-block text-nowrap">
             <?= $this->Form->number('page', [
                 'value' => $this->request->getQuery('page', '1'),
                 'style' => 'width: 3rem; text-align: center; padding-right: 0.1rem;',
@@ -51,6 +52,7 @@ $extraQueryParams = array_diff_key($this->request->getQueryParams(), ['page' => 
                     'this.value = Math.min(parseInt(this.value) || 1, %s); this.form.submit()',
                     $this->Paginator->param('pageCount')
                 ),
+                'class' => 'd-inline-block'
             ]) ?>
 
             <?= $this->Paginator->counter(__('de {{pages}}')) ?>

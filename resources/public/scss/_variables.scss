@@ -45,6 +45,14 @@ $dark: $gray-800;
 // agregamos un default en gris ya que secondary tiene color
 $theme-colors: (
   "default": $gray-300,
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
   //"green": $green,
 );
 
@@ -58,6 +66,9 @@ $lead-font-weight: inherit;
 
 $small-font-size: 85%;
 $enable-responsive-font-sizes: true;
+
+$link-decoration: none;
+$link-hover-decoration: underline;
 
 // general settings
 $enable-shadows: true;

@@ -35,9 +35,7 @@ $plugin = strtolower($this->request->getParam('plugin'));
 
 <?= $this->Html->script([
     'Ypunto/Admin.jquery.min.js',
-    'Ypunto/Admin.popper.min.js',
     'Ypunto/Admin.bootstrap.min.js',
-    'Ypunto/Admin.jquery.stickybits.min.js',
     sprintf('Ypunto/Admin.%s.js', Configure::read('debug') ? 'vue' : 'vue.min'),
 ]) ?>
 

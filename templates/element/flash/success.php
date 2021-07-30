@@ -13,9 +13,9 @@
 $dismissible = !array_key_exists('dismissible', $params) || ($params['dismissible'] === true);
 ?>
 <div class="alert alert-success <?= $dismissible ? 'alert-dismissible' : null ?> fade show" role="alert">
-    <div class="media">
+    <div class="d-flex">
         <i class="fas fa-check-circle alert-icon"></i>
-        <div class="media-body">
+        <div class="flex-grow-1">
             <?php if (!empty($params['title'])): ?>
                 <h4 class="alert-heading"><?= h($params['title']) ?></h4>
             <?php endif; ?>
@@ -27,8 +27,6 @@ $dismissible = !array_key_exists('dismissible', $params) || ($params['dismissibl
     </div>
 
     <?php if ($dismissible): ?>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true"><i class="fas fa-times"></i></span>
-        </button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     <?php endif; ?>
 </div>

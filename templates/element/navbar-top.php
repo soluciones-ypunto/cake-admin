@@ -12,7 +12,7 @@
     <!-- botón apertura/cierre menú lateral -->
     <ul class="navbar-nav d-lg-none">
         <li class="nav-item">
-            <a class="nav-link" href="#" data-toggle="sidebar">
+            <a class="nav-link" href="#" data-bs-toggle="sidebar">
                 <i class="fas fa-bars fa-fw"></i>
             </a>
         </li>
@@ -28,7 +28,7 @@
     <!-- botón de apertura/cierre de menú superior -->
     <ul class="navbar-nav d-md-none">
         <li class="nav-item">
-            <a class="nav-link" href="#topbarContent" data-toggle="collapse" aria-controls="topbarContent" aria-expanded="false" aria-label="<?= __d('admin-ypunto', 'Desplegar/contraer Menú') ?>">
+            <a class="nav-link" href="#topbarContent" data-bs-toggle="collapse" aria-controls="topbarContent" aria-expanded="false" aria-label="<?= __d('admin-ypunto', 'Desplegar/contraer Menú') ?>">
                 <i class="fas fa-cog fa-fw"></i>
             </a>
         </li>
@@ -38,15 +38,13 @@
     <div class="collapse navbar-collapse" id="topbarContent">
 
         <!-- buscador -->
-        <div class="ml-auto col col-md-4 col-xl-3 py-2 py-md-0">
+        <div class="ms-auto col col-md-4 col-xl-3 py-2 py-md-0">
             <form class="form-inline form-search">
                 <div class="input-group input-group-sm w-100">
                     <input class="form-control" type="search" placeholder="<?= __d('admin-ypunto', 'Buscar') ?>" aria-label="<?= __d('admin-ypunto', 'Buscar') ?>">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="button">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
+                    <button class="btn btn-outline-primary" type="button">
+                        <i class="fas fa-search"></i>
+                    </button>
                 </div>
             </form>
         </div>
@@ -54,13 +52,13 @@
         <!-- inicio y acciones rápidas -->
         <ul class="navbar-nav order-first">
             <li class="nav-item d-none d-lg-inline-block">
-                <a class="nav-link" href="#" data-toggle="sidebar">
+                <a class="nav-link" href="#" data-bs-toggle="sidebar">
                     <i class="fas fa-bars fa-fw"></i>
                 </a>
             </li>
             <?php if ($this->Blocks->exists('ypunto-quick-actions')): ?>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-tools fa-fw"></i> <?= __('Ir a') ?>
                 </a>
                 <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
@@ -73,14 +71,14 @@
         <!-- menú de login -->
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-user-circle fa-fw"></i> Roberto Pérez
                 </a>
-                <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                <div class="dropdown-menu dropdown-menu-end bg-dark" aria-labelledby="navbarDropdownMenuLink">
                     <h6 class="dropdown-header">Sesión Iniciada</h6>
                     <div class="px-4 py-2">
                         <div class="media">
-                            <i class="fas fa-user-circle fa-3x mr-3"></i>
+                            <i class="fas fa-user-circle fa-3x me-3"></i>
                             <div class="media-body">
                                 <h5 class="mt-0 mb-1">Roberto Pérez</h5>
                                 <p class="text-muted">Administrador</p>

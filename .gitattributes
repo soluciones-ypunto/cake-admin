@@ -22,3 +22,4 @@
 phpunit.xml.dist export-ignore
 tests/DemoApp export-ignore
 tests/TestCase export-ignore
+resources export-ignore
