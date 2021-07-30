@@ -104,4 +104,25 @@ class FormHelper extends \BootstrapUI\View\Helper\FormHelper
         'textarea' => 'BootstrapUI\View\Widget\TextareaWidget',
         '_default' => 'BootstrapUI\View\Widget\BasicWidget',
     ];
+
+    /**
+     * Output all the hidden fields for an array of data, works with nested arrays.
+     *
+     * @param array  $data
+     * @param string $prefix
+     * @param array  $htmlAttrs
+     *
+     * @return string
+     */
+    public function hiddenFields(array $data, string $prefix = '', array $htmlAttrs = []): string
+    {
+        $out = '';
+        foreach ($data as $key => $value) {
+            $out .= is_array($value)
+                ? $this->hiddenFields($value, "$key.", $htmlAttrs)
+                : PHP_EOL . $this->hidden($prefix.$key, compact('value') + $htmlAttrs);
+        }
+
+        return $out;
+    }
 }

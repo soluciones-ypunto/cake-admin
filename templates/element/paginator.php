@@ -29,9 +29,7 @@ $extraQueryParams = array_diff_key($this->request->getQueryParams(), ['page' => 
             ),
         ]) ?>
 
-        <?php foreach ($extraQueryParams as $_key => $value):
-            echo $this->Form->hidden($_key, compact('value')) . PHP_EOL;
-        endforeach; ?>
+        <?= $this->Form->hiddenFields($extraQueryParams) . PHP_EOL ?>
 
         <span class="page-info">
             <?= $this->Paginator->counter('range') ?>
@@ -44,7 +42,6 @@ $extraQueryParams = array_diff_key($this->request->getQueryParams(), ['page' => 
                 $this->Paginator->limitControl([], null, ['class' => 'd-inline-block w-auto']) ?>
 
             <span><?= __('por pág.') ?></span>
-
         </span>
 
         <span class="page-info d-none d-md-block text-nowrap">
