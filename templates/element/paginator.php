@@ -41,7 +41,8 @@ $extraQueryParams = array_diff_key($this->request->getQueryParams(), ['page' => 
                 $this->Paginator->limitControlAlone([], null, ['class' => 'd-inline-block w-auto']) :
                 $this->Paginator->limitControl([], null, ['class' => 'd-inline-block w-auto']) ?>
 
-            <span><?= __('por pág.') ?></span>
+            <?= __('por pág.') ?>
+
         </span>
 
         <span class="page-info d-none d-md-block text-nowrap">
