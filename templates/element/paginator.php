@@ -8,7 +8,7 @@
  * @var \App\View\AppView $this
  */
 
-use \Ypunto\Admin\View\Helper\PaginatorHelper;
+use Ypunto\Admin\View\Helper\PaginatorHelper;
 
 /**
  * GET forms will override params existing in query string, so we have to add them as hidden inputs
@@ -53,7 +53,7 @@ $extraQueryParams = array_diff_key($this->request->getQueryParams(), ['page' => 
                     'this.value = Math.min(parseInt(this.value) || 1, %s); this.form.submit()',
                     $this->Paginator->param('pageCount')
                 ),
-                'class' => 'd-inline-block'
+                'class' => 'd-inline-block',
             ]) ?>
 
             <?= $this->Paginator->counter(__('de {{pages}}')) ?>
