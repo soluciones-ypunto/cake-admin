@@ -50,7 +50,7 @@
 
                 </div>
                 <div class="ms-auto">
-                    <?= $this->element('Ypunto/Admin.paginator') ?>
+                    <?= $this->element('paginator') ?>
 
                 </div>
             </div>
@@ -75,15 +75,17 @@
                     <span class="drop-field"><?= h(${{ singularVar }}->{{ dropField }}) ?></span>
                 </a>
 
-                <div class="actions dropdown">
-                    <button class="btn btn-sm btn-outline-primary" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton" data-bs-boundary="window">
-                        <?= $this->Html->link(__('{icon} Ver', ['icon' => '<i class="far fa-fw fa-eye"></i>']), ['action' => 'view', {{ pk|raw }}], ['class' => 'dropdown-item', 'escape' => false]) ?>
-                        <?= $this->Html->link(__('{icon} Editar', ['icon' => '<i class="fas fa-fw fa-pencil-alt"></i>']), ['action' => 'edit', {{ pk|raw }}], ['class' => 'dropdown-item', 'escape' => false]) ?>
-                        <div class="dropdown-divider"></div>
-                        <?= $this->Form->postLink(__('{icon} Eliminar', ['icon' => '<i class="fas fa-fw fa-trash"></i>']), ['action' => 'delete', {{ pk|raw }}], ['confirm' => __('Eliminar este registro?', {{ pk|raw }}), 'class' => 'dropdown-item text-danger', 'escape' => false]) ?>
+                <div class="actions">
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-primary" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton" data-bs-boundary="window">
+                            <li><?= $this->Html->link(__('{icon} Ver', ['icon' => '<i class="far fa-fw fa-eye"></i>']), ['action' => 'view', {{ pk|raw }}], ['class' => 'dropdown-item', 'escape' => false]) ?></li>
+                            <li><?= $this->Html->link(__('{icon} Editar', ['icon' => '<i class="fas fa-fw fa-pencil-alt"></i>']), ['action' => 'edit', {{ pk|raw }}], ['class' => 'dropdown-item', 'escape' => false]) ?></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><?= $this->Form->postLink(__('{icon} Eliminar', ['icon' => '<i class="fas fa-fw fa-trash"></i>']), ['action' => 'delete', {{ pk|raw }}], ['confirm' => __('Eliminar este registro?', {{ pk|raw }}), 'class' => 'dropdown-item text-danger', 'escape' => false]) ?></li>
+                        </ul>
                     </div>
                 </div>
             </div>

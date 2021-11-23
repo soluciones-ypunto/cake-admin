@@ -167,3 +167,10 @@
     }
   }
 }
+
+.text-danger.dropdown-item {
+  &.active,
+  &:active {
+    color: #fff !important;
+  }
+}
