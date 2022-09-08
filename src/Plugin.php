@@ -5,6 +5,8 @@ namespace Ypunto\Admin;
 use Cake\Core\BasePlugin;
 use Cake\Core\Configure;
 use Cake\Core\PluginApplicationInterface;
+use Cake\Routing\Route\DashedRoute;
+use Cake\Routing\RouteBuilder;
 use Ypunto\Admin\Bake\TemplateRenderFilter;
 
 /**
@@ -21,7 +23,7 @@ class Plugin extends BasePlugin
          * Agregamos los templates del plugin a los paths de búsqueda
          */
         $paths = Configure::read('App.paths.templates');
-        array_push($paths, $this->getPath() . 'templates' . DS);
+        $paths[] = $this->getPath().'templates'.DS;
         Configure::write('App.paths.templates', $paths);
         unset($paths);
 
@@ -31,5 +33,15 @@ class Plugin extends BasePlugin
              */
             $app->getEventManager()->on(new TemplateRenderFilter());
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function routes(RouteBuilder $routes): void
+    {
+        $routes->plugin('Ypunto/Admin', ['path' => '/ypunto-admin'], function (RouteBuilder $routes) {
+            $routes->fallbacks(DashedRoute::class);
+        });
     }
 }
