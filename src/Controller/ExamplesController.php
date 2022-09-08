@@ -85,6 +85,9 @@ class ExamplesController extends AppController
             $form->setData([
                 'email' => 'unmail@gmail.com',
             ]);
+            $form->setErrors([
+                'marca' => ['_notEmpty' => 'Acá hay un problema!']
+            ]);
         }
 
         $marcas = [

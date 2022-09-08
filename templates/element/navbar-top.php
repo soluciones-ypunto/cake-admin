@@ -12,7 +12,7 @@
     <!-- botón apertura/cierre menú lateral -->
     <ul class="navbar-nav d-lg-none">
         <li class="nav-item">
-            <a class="nav-link" href="#" data-bs-toggle="sidebar">
+            <a class="nav-link" href="#" data-toggle="sidebar">
                 <i class="fas fa-bars fa-fw"></i>
             </a>
         </li>
@@ -52,7 +52,7 @@
         <!-- inicio y acciones rápidas -->
         <ul class="navbar-nav order-first">
             <li class="nav-item d-none d-lg-inline-block">
-                <a class="nav-link" href="#" data-bs-toggle="sidebar">
+                <a class="nav-link" href="#" data-toggle="sidebar">
                     <i class="fas fa-bars fa-fw"></i>
                 </a>
             </li>
