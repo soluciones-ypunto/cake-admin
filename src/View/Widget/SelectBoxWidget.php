@@ -7,12 +7,12 @@
 
 namespace Ypunto\Admin\View\Widget;
 
-use BootstrapUI\View\Widget\InputgroupTrait;
+use BootstrapUI\View\Widget\InputGroupTrait;
 use Cake\View\Form\ContextInterface;
 
 class SelectBoxWidget extends \Cake\View\Widget\SelectBoxWidget
 {
-    use InputgroupTrait;
+    use InputGroupTrait;
 
     /**
      * @param array            $data
